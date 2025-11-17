@@ -3,6 +3,18 @@
 class Room:
     """"
     This class represents a the description of room.
+    
+    Attributes:
+        name (str): name of the player
+        description (str): room's description
+        exits (dict): possibilities of exit
+
+    Methods:
+        __init__(self, name, description) : The constructor.
+
+    Examples:
+
+    >>>
     """"
 
     # Define the constructor. 
