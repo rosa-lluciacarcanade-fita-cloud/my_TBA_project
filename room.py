@@ -15,7 +15,7 @@ class Room:
     Examples:
 
     >>>
-    """"
+    """
 
     # Define the constructor. 
     def __init__(self, name, description):
