@@ -75,8 +75,10 @@ class Game:
 
         command_word = list_of_words[0]
 
-        # If the command is not recognized, print an error message
-        if command_word not in self.commands.keys():
+        # If the command is not recognized, print an error message*
+        if command_word == "":
+            print("")
+        elif command_word not in self.commands.keys():
             print(f"\nCommande '{command_word}' non reconnue. Entrez 'help' pour voir la liste des commandes disponibles.\n")
         # If the command is recognized, execute it
         else:
