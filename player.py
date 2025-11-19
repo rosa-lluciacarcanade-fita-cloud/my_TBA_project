@@ -13,7 +13,7 @@ class Player():
     Examples:
 
     >>>
-    """"
+    """
 
     # Define the constructor.
     def __init__(self, name):

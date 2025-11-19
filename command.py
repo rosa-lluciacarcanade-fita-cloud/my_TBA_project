@@ -38,6 +38,8 @@ class Command:
     
     # The string representation of the command.
     def __str__(self):
+        if self.command_word == '':
+            return None
         return  self.command_word \
                 + self.help_string
     
