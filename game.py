@@ -15,6 +15,7 @@ class Game:
         self.rooms = []
         self.commands = {}
         self.player = None
+        self.directions = set()
     
     # Setup the game
     def setup(self):
@@ -28,34 +29,105 @@ class Game:
         go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O)", Actions.go, 1)
         self.commands["go"] = go
         
-        # Setup rooms
+        # Setup rooms — Boîte de nuit
 
-        forest = Room("Forest", "une forêt enchantée. Vous entendez une brise légère à travers la cime des arbres.")
-        self.rooms.append(forest)
-        tower = Room("Tower", "une immense tour en pierre qui s'élève au dessus des nuages.")
-        self.rooms.append(tower)
-        cave = Room("Cave", "une grotte profonde et sombre. Des voix semblent provenir des profondeurs.")
-        self.rooms.append(cave)
-        cottage = Room("Cottage", "un petit chalet pittoresque avec un toit de chaume. Une épaisse fumée verte sort de la cheminée.")
-        self.rooms.append(cottage)
-        swamp = Room("Swamp", "un marécage sombre et ténébreux. L'eau bouillonne, les abords sont vaseux.")
-        self.rooms.append(swamp)
-        castle = Room("Castle", "un énorme château fort avec des douves et un pont levis. Sur les tours, des flèches en or massif.")
-        self.rooms.append(castle)
+        exterieur = Room(
+            "Dehors",
+            "Le trottoir devant la boîte : gens qui fument, Uber en warning, "
+            "et toi qui as peur de te faire recaler à l'entrée."    
+        )
+        
+        self.rooms.append(exterieur)
+
+        billetterie = Room(
+            "Billetterie",
+            "Petite file, vigile blasé, machine à CB qui fait plus de bruit que la sono. "
+            "Tu pries pour que ta carte passe."
+        )
+        self.rooms.append(billetterie)
+
+        vestiaire = Room(
+            "Vestiaire",
+            "Mega pile de manteaux, ticket froissé dans ta main, et la peur d’oublier "
+            "le numéro à 3h du matin."
+        )
+        self.rooms.append(vestiaire)
+
+        salle_techno = Room(
+            "Salle Techno",
+            "Stroboscopes, basses qui te font vibrer les organes, DJ qui ne sourit jamais "
+            "mais tout le monde l’adore."
+        )
+        self.rooms.append(salle_techno)
+
+        salle_rap = Room(
+            "Salle Rap US / FR",
+            "Ça crie les lyrics plus fort que le son, tout le monde "
+            "fait semblant de connaître tous les couplets."
+        )
+        self.rooms.append(salle_rap)
+
+        salle_house = Room(
+            "Salle House",
+            "Ambiance house, kicks propres, mélodies qui donnent envie de lever les bras "
+            "même si tu sais pas danser. Les gens ici font genre qu'ils comprennent le mix."
+        )
+        self.rooms.append(salle_house)
+
+        salle_latino = Room(
+            "Salle Latino / Shatta",
+            "Ambiance caliente, déhanchés sérieux, gens qui dansent trop bien pour que " 
+            "tu restes fidèle. Tu hésites entre te laisser tenter ou fuir."
+        )
+        self.rooms.append(salle_latino)
+
+        fumoir = Room(
+            "Fumoir",
+            "Aqua enfumée, discussions philosophiques à 2h du mat, "
+            "et quelqu’un qui parle de lancer un start-up à chaque bouffée."
+        )
+        self.rooms.append(fumoir)
+
+        secret_room = Room(
+            "Secret Room",
+            "Une petite salle cachée dont personne ne connaît vraiment la règle d’accès. "
+            "Si tu es là, soit t’es VIP, soit tu t’es perdu."
+        )
+        self.rooms.append(secret_room)
+
+        rooftop = Room(
+            "Rooftop",
+            "Vue sur la ville, guirlandes lumineuses, air frais qui sauve des coups de chaud. "
+            "Endroit parfait pour pécho ton pain autour d'un verre de rosé."
+        )
+        self.rooms.append(rooftop)
 
         # Create exits for rooms
 
-        forest.exits = {"N" : cave, "E" : None, "S" : castle, "O" : None}
-        tower.exits = {"N" : cottage, "E" : None, "S" : None, "O" : None}
-        cave.exits = {"N" : None, "E" : cottage, "S" : forest, "O" : None}
-        cottage.exits = {"N" : None, "E" : None, "S" : tower, "O" : cave}
-        swamp.exits = {"N" : tower, "E" : None, "S" : None, "O" : castle}
-        castle.exits = {"N" : forest, "E" : swamp, "S" : None, "O" : None}
+        exterieur.exits = {"N" : billetterie, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
+        billetterie.exits = {"N" : None, "E" : vestiaire, "S" : None, "O" : None, "U" : None, "D" : None}
+        vestiaire.exits = {"N" : None, "E" : None, "S" : None, "O" : billetterie, "U" : salle_house, "D" : fumoir}
+        salle_house.exits = {"N" : salle_techno, "E" : None, "S" : None, "O" : salle_latino, "U" : rooftop, "D" : vestiaire}
+        salle_latino.exits = {"N" : salle_rap, "E" : salle_house, "S" : None, "O" : None, "U" : None, "D" : None}
+        salle_rap.exits = {"N" : None, "E" : None, "S" : salle_latino, "O" : None, "U" : None, "D" : None}
+        salle_techno.exits = {"N" : None, "E" : None, "S" : salle_house, "O" : None, "U" : None, "D" : None}
+        rooftop.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : salle_house}
+        fumoir.exits = {"N" : None, "E" : None, "S" : None, "O" : secret_room, "U" : vestiaire, "D" : None}
+        secret_room.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
+
+        # Setup directions
+        print(self.rooms)
+        for room in self.rooms :
+            self.directions.add(room.exits.keys())
+            print(room.exits.keys())
+            print(room.name)
+
+        print(self.directions)
 
         # Setup player and starting room
 
         self.player = Player(input("\nEntrez votre nom: "))
-        self.player.current_room = swamp
+        self.player.current_room = exterieur
 
     # Play the game
     def play(self):
@@ -87,7 +159,7 @@ class Game:
 
     # Print the welcome message
     def print_welcome(self):
-        print(f"\nBienvenue {self.player.name} dans ce jeu d'aventure !")
+        print(f"\nBienvenue {self.player.name} dans Le Anarø CLUB !")
         print("Entrez 'help' si vous avez besoin d'aide.")
         #
         print(self.player.current_room.get_long_description())
