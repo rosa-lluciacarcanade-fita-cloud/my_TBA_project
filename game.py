@@ -26,13 +26,15 @@ class Game:
         self.commands["help"] = help
         quit = Command("quit", " : quitter le jeu", Actions.quit, 0)
         self.commands["quit"] = quit
-        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O)", Actions.go, 1)
+        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O, U, D)", Actions.go, 1)
         self.commands["go"] = go
-        
+        back = Command("back", " : pour revenir en arrière", Actions.back, 0)
+        self.commands["back"] = back
+
         # Setup rooms — Boîte de nuit
 
         exterieur = Room(
-            "Dehors",
+            "Exterieur",
             "Le trottoir devant la boîte : gens qui fument, Uber en warning, "
             "et toi qui as peur de te faire recaler à l'entrée."    
         )

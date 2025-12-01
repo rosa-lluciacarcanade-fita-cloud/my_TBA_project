@@ -145,3 +145,7 @@ class Actions:
             print("\t- " + str(command))
         print()
         return True
+    
+    def back(game, list_of_words, number_of_parameters):
+        if self.history.name != []:
+            self.history.pop()
