@@ -116,13 +116,13 @@ class Game:
         secret_room.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
 
         # Setup directions
-        print(self.rooms)
+        #print(self.rooms)
         for room in self.rooms :
-            self.directions.add(room.exits.keys())
-            print(room.exits.keys())
-            print(room.name)
+            self.directions.update(room.exits.keys())
+            #print(room.exits.keys())
+            #print(room.name)
 
-        print(self.directions)
+        #print(self.directions)
 
         # Setup player and starting room
 
