@@ -147,5 +147,18 @@ class Actions:
         return True
     
     def back(game, list_of_words, number_of_parameters):
-        if self.history.name != []:
-            self.history.pop()
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        player = game.player
+
+        if not player.history:
+            print("\nVous ne pouvez pas revenir en arrière.\n")
+            return False
+
+        player.current_room = player.history.pop()
+        print(player.current_room.get_long_description())
+        player.get_history()
+        return True

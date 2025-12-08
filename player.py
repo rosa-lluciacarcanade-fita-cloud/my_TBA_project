@@ -32,13 +32,17 @@ class Player():
             return False
         
         # Set the current room to the next room.
-        self.history.append(self.current_room.name)
+        self.history.append(self.current_room)
         self.current_room = next_room
         print(self.current_room.get_long_description())
         self.get_history()
         return True
 
     def get_history (self):
-        print (f"\n Vous avez déja visité les pièces suivantes:")
+        print (f"\nVous avez déjà visité les pièces suivantes:")
         for pieces in self.history:
-            print(f"    - {pieces}")
+            # `pieces` est un objet Room ; afficher son nom si possible
+            try:
+                print(f"    - {pieces.name}")
+            except Exception:
+                print(f"    - {pieces}")
