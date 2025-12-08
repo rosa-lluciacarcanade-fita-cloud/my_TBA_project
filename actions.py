@@ -162,3 +162,71 @@ class Actions:
         print(player.current_room.get_long_description())
         player.get_history()
         return True
+    
+    def look(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+
+        if game.player.current_room.inventory == {}:
+            print("\nIl n'y a aucun objet dans cette pièce.\n")
+            return True
+
+        player = game.player
+        print(game.player.current_room.get_inventory())
+        return True
+
+    def take(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
+        player = game.player
+        item_name = list_of_words[1]
+        current_room = player.current_room
+
+        if item_name not in current_room.inventory:
+            print(f"\nL'objet '{item_name}' n'est pas dans cette pièce.\n")
+            return False
+
+        item = current_room.inventory.pop(item_name)
+        player.inventory[item_name] = item
+        print(f"\nVous avez pris l'objet '{item_name}'.\n")
+        return True
+    
+    def drop(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
+        player = game.player
+        item_name = list_of_words[1]
+
+        if item_name not in player.inventory:
+            print(f"\nL'objet '{item_name}' n'est pas dans votre inventaire.\n")
+            return False
+
+        item = player.inventory.pop(item_name)
+        current_room = player.current_room
+        current_room.inventory[item_name] = item
+        print(f"\nVous avez déposé l'objet '{item_name}'.\n")
+        return True
+
+    def check(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG0.format(command_word=command_word))
+            return False
+        player = game.player
+        print(f"\nVous disposez des items suivant :\n")
+        for item in game.player.inventory():
+            print(f"    - {item}")
+        print()
+        player.get_inventory()
+        return True
+

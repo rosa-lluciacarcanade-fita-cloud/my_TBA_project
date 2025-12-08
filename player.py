@@ -20,7 +20,8 @@ class Player():
         self.name = name
         self.current_room = None
         self.history = []
-    
+        self.inventory = {}
+
     # Define the move method.
     def move(self, direction):
         # Get the next room from the exits dictionary of the current room.
@@ -46,3 +47,16 @@ class Player():
                 print(f"    - {pieces.name}")
             except Exception:
                 print(f"    - {pieces}")
+
+    def get_inventory(self):
+        if not self.inventory:
+            print("\nVotre inventaire est vide.\n")
+            return
+        print("\nVoici les objets dans votre inventaire:")
+        for item in self.inventory.values():
+            print(f"    - {item}")
+        print()
+
+    
+
+

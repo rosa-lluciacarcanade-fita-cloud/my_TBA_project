@@ -6,6 +6,7 @@ from room import Room
 from player import Player
 from command import Command
 from actions import Actions
+from item import Item
 
 class Game:
 
@@ -30,6 +31,14 @@ class Game:
         self.commands["go"] = go
         back = Command("back", " : pour revenir en arrière", Actions.back, 0)
         self.commands["back"] = back
+        look = Command("look", " : pour observer ce que contient la pièce", Actions.look, 0)
+        self.commands["look"] = look 
+        take = Command("take", " <nom_objet> : pour prendre un objet dans la pièce", Actions.take, 1)
+        self.commands["take"] = take
+        drop = Command("drop", " <nom_objet> : pour déposer un objet de votre inventaire dans la pièce", Actions.drop, 1)
+        self.commands["drop"] = drop
+        check = Command("check", " : pour vérifier le contenu de votre inventaire", Actions.check, 0)
+        self.commands["check"] = check
 
         # Setup rooms — Boîte de nuit
 
@@ -104,8 +113,15 @@ class Game:
         )
         self.rooms.append(rooftop)
 
-        # Create exits for rooms
 
+        # Create inventory items in rooms
+        vestiaire.inventory = {}
+
+        # Create items
+        ticket_vestiaire = Item("ticket_vestiaire", "Ton ticket du vestiaire, indispensable pour récupérer ton manteau plus tard.", 1)
+        vestiaire.inventory ["ticket_vestiaire"] = ticket_vestiaire
+
+        # Create exits for rooms
         exterieur.exits = {"N" : billetterie, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
         billetterie.exits = {"N" : None, "E" : vestiaire, "S" : None, "O" : None, "U" : None, "D" : None}
         vestiaire.exits = {"N" : None, "E" : None, "S" : None, "O" : billetterie, "U" : salle_house, "D" : fumoir}
@@ -116,6 +132,8 @@ class Game:
         rooftop.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : salle_house}
         fumoir.exits = {"N" : None, "E" : None, "S" : None, "O" : secret_room, "U" : vestiaire, "D" : None}
         secret_room.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
+
+
 
         # Setup directions
         #print(self.rooms)
