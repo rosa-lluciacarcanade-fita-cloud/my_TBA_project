@@ -7,6 +7,7 @@ from player import Player
 from command import Command
 from actions import Actions
 from item import Item
+from character import Character
 
 class Game:
 
@@ -142,8 +143,9 @@ class Game:
         fumoir.exits = {"N" : None, "E" : None, "S" : None, "O" : secret_room, "U" : vestiaire, "D" : None}
         secret_room.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
 
-
-
+        # PNJ
+        daniel_le_farfadet_malicieux = Character("Daniel le Farfadet malicieux", "Un petit être espiègle qui aime jouer des tours aux fêtards imprudents.", salle_latino, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut..."])
+        salle_latino.characters.append(daniel_le_farfadet_malicieux)
         # Setup directions
         #print(self.rooms)
         for room in self.rooms :
