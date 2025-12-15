@@ -51,6 +51,6 @@ class Room:
             print("\nIl n'y a aucun objet dans cette pièce.\n")
             return
         print("\nVoici les objets dans cette pièce:")
-        for item in self.inventory.items():
-            print(item)
+        for item in self.inventory.values():
+            print(f"    - {item}")
         print()

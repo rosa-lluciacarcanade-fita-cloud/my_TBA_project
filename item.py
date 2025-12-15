@@ -1,11 +1,12 @@
 class Item :
     def __init__(self, name, description, weight):
-        self.name = ""
-        self.description = ""
-        self.weight = 0
+        # Initialiser les attributs avec les paramètres fournis
+        self.name = name
+        self.description = description
+        self.weight = weight
 
     def __str__(self):
-        return f"{self.name} : {self.description} (poids: {self.weight} kg)"
+        return f"{self.name} : {self.description} ({self.weight} kg)"
 
      
 

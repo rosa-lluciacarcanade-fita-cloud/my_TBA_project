@@ -54,7 +54,7 @@ class Actions:
             return False
         
         # Get the direction from the list of words.
-        directions = {"NORD": "N", "N": "N", "SUD": "S", "OUEST": "O", "O": "O",
+        directions = {"NORD": "N", "N": "N", "SUD": "S", "S": "S", "OUEST": "O", "O": "O",
                       "EST": "E", "E": "E", "DOWN": "D", "D": "D", "UP":"U", "U": "U"}
         
         direction = list_of_words[1].upper() #upper = meme minuscule marche
@@ -169,13 +169,10 @@ class Actions:
             command_word = list_of_words[0]
             print(MSG0.format(command_word=command_word))
             return False
-
-        if game.player.current_room.inventory == {}:
-            print("\nIl n'y a aucun objet dans cette pièce.\n")
-            return True
-
-        player = game.player
-        print(game.player.current_room.get_inventory())
+        # Afficher la description longue de la pièce
+        print(game.player.current_room.get_long_description())
+        # Puis afficher l'inventaire de la pièce (la méthode s'occupe du message si vide)
+        game.player.current_room.get_inventory()
         return True
 
     def take(game, list_of_words, number_of_parameters):
@@ -191,7 +188,11 @@ class Actions:
         if item_name not in current_room.inventory:
             print(f"\nL'objet '{item_name}' n'est pas dans cette pièce.\n")
             return False
-
+        
+        if sum(item.weight for item in player.inventory.values()) + current_room.inventory[item_name].weight > player.max_weight:
+            print(f"\nVous ne pouvez pas prendre l'objet '{item_name}' car il dépasserait la limite de poids de votre inventaire ({player.max_weight} kg).\n")
+            return False
+            
         item = current_room.inventory.pop(item_name)
         player.inventory[item_name] = item
         print(f"\nVous avez pris l'objet '{item_name}'.\n")
@@ -223,10 +224,7 @@ class Actions:
             print(MSG0.format(command_word=command_word))
             return False
         player = game.player
-        print(f"\nVous disposez des items suivant :\n")
-        for item in game.player.inventory():
-            print(f"    - {item}")
-        print()
+        # Utiliser la méthode utilitaire du joueur pour afficher l'inventaire
         player.get_inventory()
         return True
 

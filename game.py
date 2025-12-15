@@ -118,8 +118,17 @@ class Game:
         vestiaire.inventory = {}
 
         # Create items
-        ticket_vestiaire = Item("ticket_vestiaire", "Ton ticket du vestiaire, indispensable pour récupérer ton manteau plus tard.", 1)
+        ticket_vestiaire = Item("ticket_vestiaire", "Indispensable pour récupérer ton manteau plus tard.", 1)
         vestiaire.inventory ["ticket_vestiaire"] = ticket_vestiaire
+        place_carre_VIP = Item("place_carré_VIP", "Essentiel pour accéder à la soirée de la secret room, seulement pour les plus hots...", 1)
+        salle_rap.inventory ["place_carré_VIP"] = place_carre_VIP
+        sex_on_the_beach = Item("sex_on_the_beach", "Un cocktail sucré et coloré, parfait pour débuter la soirée.", 1)
+        rooftop.inventory ["sex_on_the_beach"] = sex_on_the_beach
+        un_metre_de_shooter = Item("1_mètre_de_shooter", "Un long shooter à partager, ou non. Ton foie va-t-il résister ?", 1)
+        salle_rap.inventory ["1_mètre_de_shooter"] = un_metre_de_shooter
+        champignons_magiques = Item("champignons_magiques", "Pour une soirée de farfadet où ton cerveau va alluciner. Vas-tu devenir adict ?", 1)
+        salle_techno.inventory ["champignons_magiques"] = champignons_magiques
+
 
         # Create exits for rooms
         exterieur.exits = {"N" : billetterie, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
