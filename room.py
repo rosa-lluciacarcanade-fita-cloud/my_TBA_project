@@ -23,7 +23,7 @@ class Room:
         self.description = description
         self.exits = {}
         self.inventory = {}
-        self.characters = []
+        self.characters = {}
     
     # Define the get_exit method.
     def get_exit(self, direction):
@@ -48,7 +48,7 @@ class Room:
         return f"\n{self.description}\n\n{self.get_exit_string()}\n"
 
     def get_inventory(self):
-        # Affiche les items et les personnages présents dans la pièce.
+        # Affiche les items et des personnages non joueurs présents dans la pièce.
         if not self.inventory and not self.characters:
             print("\nIl n'y a aucun objet ni personnage dans cette pièce.\n")
             return
@@ -57,18 +57,10 @@ class Room:
         # Afficher les objets
         for item in self.inventory.values():
             print(f"    - {item}")
-
-        # Afficher les personnages non-joueurs
-        for char in self.characters:
-            # Si l'objet possède des attributs `name` et `description`, les afficher proprement
-            name = getattr(char, 'name', None)
-            desc = getattr(char, 'description', None)
-            if name and desc:
-                print(f"    - {name} : {desc}")
-            elif name:
-                print(f"    - {name}")
-            else:
-                # Fallback : utiliser str()
-                print(f"    - {char}")
-
+        # Afficher les personnages
+        for character in self.characters.values():
+            print(f"    - {character}")
         print()
+
+    
+

@@ -16,6 +16,7 @@ MSG0 = "\nLa commande '{command_word}' ne prend pas de paramètre.\n"
 # The MSG1 variable is used when the command takes 1 parameter.
 MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
 
+
 class Actions:
 
     def go(game, list_of_words, number_of_parameters):
@@ -228,3 +229,25 @@ class Actions:
         player.get_inventory()
         return True
 
+    def talk(game, list_of_words, number_of_parameters):
+        l = len(list_of_words)
+        if l != number_of_parameters + 1:
+            command_word = list_of_words[0]
+            print(MSG1.format(command_word=command_word))
+            return False
+        player = game.player
+        current_room = player.current_room
+
+        if not current_room.characters :
+            print("\nIl n'y a aucun personnage dans cette pièce avec qui parler.\n")
+            return False
+        
+        Pnj_name = list_of_words[1].lower()
+
+        for pnj in current_room.characters.values():
+            if pnj.name.lower() == Pnj_name or Pnj_name in pnj.name.lower():
+                pnj.get_msg()
+                return True
+
+        print(f"\nLe personnage '{list_of_words[1]}' n'est pas présent dans cette pièce.\n")
+        return False

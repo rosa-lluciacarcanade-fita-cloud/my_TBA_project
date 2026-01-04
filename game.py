@@ -1,13 +1,13 @@
 # Description: Game class
 
-# Import modules
+DEBUG = True
 
+# Import modules
 from room import Room
 from player import Player
 from command import Command
 from actions import Actions
 from item import Item
-from character import Character
 
 class Game:
 
@@ -40,6 +40,8 @@ class Game:
         self.commands["drop"] = drop
         check = Command("check", " : pour vérifier le contenu de votre inventaire", Actions.check, 0)
         self.commands["check"] = check
+        talk = Command("talk", " <nom_personnage> : pour parler à un personnage non-joueur (PNJ) dans la pièce", Actions.talk, 1)
+        self.commands["talk"] = talk
 
         # Setup rooms — Boîte de nuit
 
@@ -144,8 +146,13 @@ class Game:
         secret_room.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
 
         # PNJ
-        daniel_le_farfadet_malicieux = Character("Daniel le Farfadet malicieux", "Un petit être espiègle qui aime jouer des tours aux fêtards imprudents.", salle_latino, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut..."])
-        salle_latino.characters.append(daniel_le_farfadet_malicieux)
+        # Importer localement Character pour éviter l'import circulaire si on importe `character` directement
+        from character import Character
+
+        daniel_le_farfadet_malicieux = Character("Daniel", "Un petit être espiègle qui aime jouer des tours aux fêtards imprudents.", salle_latino, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."])
+        salle_latino.characters [daniel_le_farfadet_malicieux] = daniel_le_farfadet_malicieux
+
+
         # Setup directions
         #print(self.rooms)
         for room in self.rooms :
