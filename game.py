@@ -1,7 +1,5 @@
 # Description: Game class
-
 DEBUG = True
-
 # Import modules
 from room import Room
 from player import Player
@@ -18,6 +16,7 @@ class Game:
         self.commands = {}
         self.player = None
         self.directions = set()
+        self.characters = []
     
     # Setup the game
     def setup(self):
@@ -149,10 +148,15 @@ class Game:
         # Importer localement Character pour éviter l'import circulaire si on importe `character` directement
         from character import Character
 
-        daniel_le_farfadet_malicieux = Character("Daniel", "Un petit être espiègle qui aime jouer des tours aux fêtards imprudents.", salle_latino, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."])
-        salle_latino.characters [daniel_le_farfadet_malicieux] = daniel_le_farfadet_malicieux
-
-
+        daniel_le_farfadet_malicieux = Character("Daniel", "Un petit être espiègle qui aime jouer des tours aux fêtards imprudents.", rooftop, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."])
+        rooftop.characters.append(daniel_le_farfadet_malicieux)
+        self.characters.append(daniel_le_farfadet_malicieux)
+        Anadélys = Character("Anadélys", "Tu sais la pote que tu perds tout le temps car elle part en quête secondaire pendant la soirée, c'est elle !", salle_latino, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."])
+        salle_latino.characters.append(Anadélys)
+        self.characters.append(Anadélys)
+        Tony_le_barman_bg = Character("Tony", "Le barman le plus cool de la boîte, toujours prêt à te servir un cocktail avec le sourire.", salle_house, ["Qu'est-ce que je te sers ce soir ? J'ai des cocktails qui font danser même les plus timides !", "Tu sais, la clé d'une bonne soirée, c'est un bon cocktail et une bonne compagnie.", "Si tu cherches quelque chose de spécial, demande-moi, j'ai des recettes secrètes."])
+        salle_house.characters.append(Tony_le_barman_bg)
+        self.characters.append(Tony_le_barman_bg)
         # Setup directions
         #print(self.rooms)
         for room in self.rooms :
@@ -197,7 +201,7 @@ class Game:
 
     # Print the welcome message
     def print_welcome(self):
-        print(f"\nBienvenue {self.player.name} dans Le Anarø CLUB !")
+        print(f"\nBienvenue {self.player.name} dans L'Anarø CLUB !")
         print("Entrez 'help' si vous avez besoin d'aide.")
         #
         print(self.player.current_room.get_long_description())

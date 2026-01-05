@@ -23,7 +23,7 @@ class Room:
         self.description = description
         self.exits = {}
         self.inventory = {}
-        self.characters = {}
+        self.characters = []
     
     # Define the get_exit method.
     def get_exit(self, direction):
@@ -58,9 +58,18 @@ class Room:
         for item in self.inventory.values():
             print(f"    - {item}")
         # Afficher les personnages
-        for character in self.characters.values():
+        for character in self.characters :
             print(f"    - {character}")
         print()
 
+    def add_characters(self, character):
+        if character not in self.characters:
+            self.characters.append(character)
+            character.current_room = self
+
+    def remove_characters(self, character):
+        if character in self.characters:
+            self.characters.remove(character)
+            character.current_room = None
     
 

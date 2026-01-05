@@ -1,5 +1,4 @@
 import random
-from game import DEBUG
 
 class Character:
     def __init__(self, name, description, current_room, msgs):
@@ -10,9 +9,10 @@ class Character:
 
     def __str__(self):
         return f"{self.name} : {self.description}"
-
-#PROBLEME le PNJ peut avoir current_room = nouvelle salle mais rester listé dans old_room.characters, d'où le message "n'est pas présent" quand on cherche le PNJ dans la salle.
-    #def move(self):
+    
+     #PROBLEME le PNJ peut avoir current_room = nouvelle salle mais rester listé dans old_room.characters, d'où le message "n'est pas présent" quand on cherche le PNJ dans la salle.
+    def move(self):
+        from game import DEBUG
         # Decision de se déplacer ou non
         
         if not random.choice([True, False]):
@@ -29,8 +29,14 @@ class Character:
         # Si la salle choisie est la même (au cas où), on considère que le PNJ n'a pas bougé
         if next_room is self.current_room:
             return False
+
+        # Mettre à jour la salle actuelle du PNJ    
+
+        self.current_room.remove_characters(self)
+        next_room.add_characters(self)
         
         self.current_room = next_room
+
         if DEBUG:
             print(f"DEBUG : {self.name} se déplace vers {self.current_room.name}.")
         return True

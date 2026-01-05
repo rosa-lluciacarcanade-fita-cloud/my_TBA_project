@@ -16,8 +16,13 @@ MSG0 = "\nLa commande '{command_word}' ne prend pas de paramètre.\n"
 # The MSG1 variable is used when the command takes 1 parameter.
 MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
 
-
 class Actions:
+
+    #PROBLEME le PNJ peut avoir current_room = nouvelle salle mais rester listé dans old_room.characters, d'où le message "n'est pas présent" quand on cherche le PNJ dans la salle.
+    def move_pnj(game, list_of_words, number_of_parameters):
+        for character in game.characters:
+            character.move()
+        return True
 
     def go(game, list_of_words, number_of_parameters):
         """
@@ -63,6 +68,7 @@ class Actions:
         if direction in directions:
             direction = directions[direction]
             # Move the player in the direction specified by the parameter.
+            Actions.move_pnj(game, [], 0)
             player.move(direction)
         else :
             print("\nDirection", direction, "non reconnue")
@@ -244,7 +250,7 @@ class Actions:
         
         Pnj_name = list_of_words[1].lower()
 
-        for pnj in current_room.characters.values():
+        for pnj in current_room.characters:
             if pnj.name.lower() == Pnj_name or Pnj_name in pnj.name.lower():
                 pnj.get_msg()
                 return True
