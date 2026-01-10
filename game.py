@@ -6,6 +6,7 @@ from player import Player
 from command import Command
 from actions import Actions
 from item import Item
+from quest import Quest 
 
 class Game:
 
@@ -17,7 +18,72 @@ class Game:
         self.player = None
         self.directions = set()
         self.characters = []
-    
+
+    # Setup the game
+    def setup(self, player_name=None):
+        """Initialize the game with rooms, commands, and quests."""
+        self._setup_commands()
+        self._setup_rooms()
+        self._setup_player(player_name)
+        self._setup_quests()
+
+    def _setup_commands(self):
+        """Initialize all game commands."""
+        self.commands["help"] = Command("help"
+                                        , " : afficher cette aide"
+                                        , Actions.help
+                                        , 0)
+        self.commands["quit"] = Command("quit"
+                                        , " : quitter le jeu"
+                                        , Actions.quit
+                                        , 0)
+        self.commands["go"] = Command("go"
+                                      , "<N|E|S|O> : se déplacer dans une direction cardinale"
+                                      , Actions.go
+                                      , 1)
+        self.commands["quests"] = Command("quests"
+                                          , " : afficher la liste des quêtes"
+                                          , Actions.quests
+                                          , 0)
+        self.commands["quest"] = Command("quest"
+                                         , "<nom_quête> : afficher les détails d'une quête"
+                                         , Actions.quest
+                                         , 1)
+        self.commands["take"] = Command("take"
+                                        , "<nom_objet> : prendre un objet"
+                                        , Actions.take
+                                        , 1)
+        self.commands["drop"] = Command("drop"
+                                        , "<nom_objet> : déposer un objet"
+                                        , Actions.drop
+                                        , 1)
+        self.commands["back"] = Command("back"
+                                        , " : revenir en arrière"
+                                        , Actions.back
+                                        , 0)
+        self.commands["look"] = Command("look"
+                                        , " : observer la pièce"
+                                        , Actions.look
+                                        , 0)
+        self.commands["check"] = Command("check"
+                                         , " : vérifier l'inventaire"
+                                         , Actions.check
+                                         , 0)
+        self.commands["talk"] = Command("talk"
+                                        , "<nom_personnage> : parler à un personnage non-joueur"
+                                        , Actions.talk
+                                        , 1)    
+        self.commands["activate"] = Command("activate"
+                                           , "<nom_objet> : activer un objet spécial"
+                                           , Actions.activate
+                                           , 1)
+        self.commands["rewards"] = Command("rewards"
+                                           , " : afficher vos récompenses"
+                                           , Actions.rewards
+                                           , 0)
+
+
+
     # Setup the game
     def setup(self):
 
