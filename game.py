@@ -139,10 +139,100 @@ class Game:
     # Setup quests
     def _setup_quests(self):
         """Initialize all quests."""
+        # Quete principale
+        main_quest = Quest(
+        title="Survivre à la Nuit",
+        description=(
+            "Objectif : survivre jusqu'à la fermeture et entrer dans la salle VIP. "
+            "Pas de drama, pas de sécurité, et surtout… assez de jetons."
+        ),
+        objectives=[
+            "Obtenir pass VIP",
+            "Obtenir le code de Daniel",
+            "Avoir 3 jetons",
+            "Ne pas se faire virer",
+            "Visiter Secret Room"
+        ],
+        reward="Victoire : VIP avant fermeture 🥂"
+    )
         
+    # Petite quête secondaire 1 — Pass carré VIP
+    pass_carre_VIP_quest = Quest(
+        title="Chercher le pass carré VIP",
+        description=(
+            "Un client a perdu son pass d’accès au carré VIP. "
+            "Si tu le retrouves, tu gagnes un jeton et tu pourras infiltrer la secret room."
+        ),
+        objectives=[
+            "Visiter Rooftop",
+            "Fouiller le sol",
+            "Obtenir le pass carré VIP",
+            "Retourner à secret room",
+            "Donner le pass au vigile de la secret room"
+        ],
+        reward="+1 jeton"
+    )
 
+    # Petite quête 2 — DJ tête en l'air
+    dj_quest = Quest(
+        title="DJ tête en l'air",
+        description=(
+            "Le DJ a perdu son casque dans la soirée... il ne peut pas commencer son set. "
+            "Si tu l'aides à le retrouver, il te devra une grosse ambiance."
+        ),
+        objectives=[
+            "Parler au DJ",
+            "Visiter le fumoir",
+            "Récupérer le casque du DJ",
+            "Le déposer à la salle techno"
+        ],
+        reward="+1 jeton"
+    )
 
+     # Petite quête 3 — Le cocktail Daniel
+    cocktail_quest = Quest(
+        title="Le cocktail Daniel",
+        description=(
+            "Tony le barman a créé un nouveau cocktail à l'éfigie du fameux Daniel. "
+            "Cependant, il n'a plus de sirop magique. Retrouve la bouteille de sirop pour lui, et il te préparera sa spécialité."
+        ),
+        objectives=[
+            "Visiter la salle house",
+            "Trouver la bouteille de sirop magique au vestiaire",
+            "Déposer le sirop à la salle house."
+        ],
+        reward="+1 jeton"
+    )
 
+     # Petite quête 4 — Chauffeur de salle
+    hype_quest = Quest(
+        title="Chauffeur de Salle",
+        description=(
+            "Le DJ Rap cherche quelqu’un pour chauffer le public. "
+            "Pour être l'heureux élu, tu dois avoir bu un sex on the beach au rooftoop..."
+        ),
+        objectives=[
+            "Visiter le rooftop",
+            "Boire un sex on the beach",
+            "Retourner à la salle rap",
+        ],
+        reward="+1 jeton"
+    )
+
+    # Petite quête 5 — Retrouve ta pote Anadélys
+    research_quest = Quest(
+        title="Retrouve ta pote Anadélys",
+        description=(
+            "Anadélys a disparu dans la soirée. "
+            "Trouve-la vite avant qu'elle ne soit dans une situation critique. Pour cela tu dois éviter qu'elle boive un mètre de shooter."
+        ),
+        objectives=[
+            "Visiter la salle rap",
+            "Prendre les 1 mètre de shooter",
+            "Retrouver Anadélys",
+        ],
+        reward="+1 jeton"
+    )
 
     # Setup the game
     def setup(self):
