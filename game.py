@@ -27,6 +27,7 @@ class Game:
         self._setup_player(player_name)
         self._setup_quests()
 
+    # Setup commands
     def _setup_commands(self):
         """Initialize all game commands."""
         self.commands["help"] = Command("help"
@@ -38,17 +39,9 @@ class Game:
                                         , Actions.quit
                                         , 0)
         self.commands["go"] = Command("go"
-                                      , "<N|E|S|O> : se déplacer dans une direction cardinale"
+                                      , "<N|E|S|O|U|D> : se déplacer dans une direction cardinale"
                                       , Actions.go
                                       , 1)
-        self.commands["quests"] = Command("quests"
-                                          , " : afficher la liste des quêtes"
-                                          , Actions.quests
-                                          , 0)
-        self.commands["quest"] = Command("quest"
-                                         , "<nom_quête> : afficher les détails d'une quête"
-                                         , Actions.quest
-                                         , 1)
         self.commands["take"] = Command("take"
                                         , "<nom_objet> : prendre un objet"
                                         , Actions.take
@@ -72,7 +65,15 @@ class Game:
         self.commands["talk"] = Command("talk"
                                         , "<nom_personnage> : parler à un personnage non-joueur"
                                         , Actions.talk
-                                        , 1)    
+                                        , 1)
+        self.commands["quests"] = Command("quests"
+                                          , " : afficher la liste des quêtes"
+                                          , Actions.quests
+                                          , 0)
+        self.commands["quest"] = Command("quest"
+                                         , "<nom_quête> : afficher les détails d'une quête"
+                                         , Actions.quest
+                                         , 1)    
         self.commands["activate"] = Command("activate"
                                            , "<nom_objet> : activer un objet spécial"
                                            , Actions.activate
@@ -82,104 +83,69 @@ class Game:
                                            , Actions.rewards
                                            , 0)
 
+     # Setup rooms   
+    def _setup_rooms(self):
+        """Initialize all rooms and their exits."""
+        # Create rooms
+        s =  "Exterieur \n Le trottoir devant la boîte : gens qui fument, Uber en warning \n et toi qui as peur de te faire recaler à l'entrée."  
+        exterieur = Room("Exterieur", s)
+        s = "Billetterie \n Petite file, vigile blasé, machine à CB qui fait plus de bruit que la sono. \n Tu pries pour que ta carte passe."
+        billetterie = Room("Billetterie", s)
+        s = "Vestiaire \n Mega pile de manteaux, ticket froissé dans ta main, et la peur d’oublier \n le numéro à 3h du matin."
+        vestiaire = Room("Vestiaire", s)
+        s = "Salle Techno \n Stroboscopes, basses qui te font vibrer les organes, DJ qui ne sourit jamais \n mais tout le monde l’adore."
+        salle_techno = Room("Salle Techno", s)
+        s = "Salle Rap US / FR \n Ça crie les lyrics plus fort que le son, tout le monde \n fait semblant de connaître tous les couplets."
+        salle_rap = Room("Salle Rap US / FR", s)
+        s = "Salle House \n Ambiance house, kicks propres, mélodies qui donnent envie de lever les bras \n même si tu sais pas danser. Les gens ici font genre qu'ils comprennent le mix."
+        salle_house = Room("Salle House", s)
+        s = "Salle Latino / Shatta \n Ambiance caliente, déhanchés sérieux, gens qui dansent trop bien pour que \n tu restes fidèle. Tu hésites entre te laisser tenter ou fuir."
+        salle_latino = Room("Salle Latino / Shatta", s)
+        s = "Fumoir \n Aqua enfumée, discussions philosophiques à 2h du mat, \n et quelqu’un qui parle de lancer un start-up à chaque bouffée."
+        fumoir = Room("Fumoir", s)
+        s = "Secret Room \n Une petite salle cachée dont personne ne connaît vraiment la règle d’accès. \n Si tu es là, soit t’es VIP, soit tu t’es perdu."
+        secret_room = Room("Secret Room", s)
+        s = "Rooftop \n Vue sur la ville, guirlandes lumineuses, air frais qui sauve des coups de chaud. \n Endroit parfait pour pécho ton pain autour d'un verre de rosé."
+        rooftop = Room("Rooftop", s)
+
+
+        # Add rooms to game
+        for room in [exterieur, billetterie, vestiaire, salle_techno, salle_rap, salle_house, salle_latino, fumoir, secret_room, rooftop]:  
+            self.rooms.append(room)
+
+
+        # Create exits for rooms
+        exterieur.exits = {"N" : billetterie, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
+        billetterie.exits = {"N" : None, "E" : vestiaire, "S" : None, "O" : None, "U" : None, "D" : None}
+        vestiaire.exits = {"N" : None, "E" : None, "S" : None, "O" : billetterie, "U" : salle_house, "D" : fumoir}
+        salle_house.exits = {"N" : salle_techno, "E" : None, "S" : None, "O" : salle_latino, "U" : rooftop, "D" : vestiaire}
+        salle_latino.exits = {"N" : salle_rap, "E" : salle_house, "S" : None, "O" : None, "U" : None, "D" : None}
+        salle_rap.exits = {"N" : None, "E" : None, "S" : salle_latino, "O" : None, "U" : None, "D" : None}
+        salle_techno.exits = {"N" : None, "E" : None, "S" : salle_house, "O" : None, "U" : None, "D" : None}
+        rooftop.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : salle_house}
+        fumoir.exits = {"N" : None, "E" : None, "S" : None, "O" : secret_room, "U" : vestiaire, "D" : None}
+        secret_room.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
+
+    # Setup player and starting room    
+    def _setup_player(self, player_name=None):
+        """Initialize the player."""
+        if player_name is None:
+            player_name = input("\nEntrez votre nom: ")
+
+
+        self.player = Player(player_name)
+        self.player.current_room = self.rooms[0]  # exterieur
+
+    # Setup quests
+    def _setup_quests(self):
+        """Initialize all quests."""
+        
+
+
 
 
     # Setup the game
     def setup(self):
-
-        # Setup commands
-
-        help = Command("help", " : afficher cette aide", Actions.help, 0)
-        self.commands["help"] = help
-        quit = Command("quit", " : quitter le jeu", Actions.quit, 0)
-        self.commands["quit"] = quit
-        go = Command("go", " <direction> : se déplacer dans une direction cardinale (N, E, S, O, U, D)", Actions.go, 1)
-        self.commands["go"] = go
-        back = Command("back", " : pour revenir en arrière", Actions.back, 0)
-        self.commands["back"] = back
-        look = Command("look", " : pour observer ce que contient la pièce", Actions.look, 0)
-        self.commands["look"] = look 
-        take = Command("take", " <nom_objet> : pour prendre un objet dans la pièce", Actions.take, 1)
-        self.commands["take"] = take
-        drop = Command("drop", " <nom_objet> : pour déposer un objet de votre inventaire dans la pièce", Actions.drop, 1)
-        self.commands["drop"] = drop
-        check = Command("check", " : pour vérifier le contenu de votre inventaire", Actions.check, 0)
-        self.commands["check"] = check
-        talk = Command("talk", " <nom_personnage> : pour parler à un personnage non-joueur (PNJ) dans la pièce", Actions.talk, 1)
-        self.commands["talk"] = talk
-
-        # Setup rooms — Boîte de nuit
-
-        exterieur = Room(
-            "Exterieur",
-            "Le trottoir devant la boîte : gens qui fument, Uber en warning, "
-            "et toi qui as peur de te faire recaler à l'entrée."    
-        )
-        
-        self.rooms.append(exterieur)
-
-        billetterie = Room(
-            "Billetterie",
-            "Petite file, vigile blasé, machine à CB qui fait plus de bruit que la sono. "
-            "Tu pries pour que ta carte passe."
-        )
-        self.rooms.append(billetterie)
-
-        vestiaire = Room(
-            "Vestiaire",
-            "Mega pile de manteaux, ticket froissé dans ta main, et la peur d’oublier "
-            "le numéro à 3h du matin."
-        )
-        self.rooms.append(vestiaire)
-
-        salle_techno = Room(
-            "Salle Techno",
-            "Stroboscopes, basses qui te font vibrer les organes, DJ qui ne sourit jamais "
-            "mais tout le monde l’adore."
-        )
-        self.rooms.append(salle_techno)
-
-        salle_rap = Room(
-            "Salle Rap US / FR",
-            "Ça crie les lyrics plus fort que le son, tout le monde "
-            "fait semblant de connaître tous les couplets."
-        )
-        self.rooms.append(salle_rap)
-
-        salle_house = Room(
-            "Salle House",
-            "Ambiance house, kicks propres, mélodies qui donnent envie de lever les bras "
-            "même si tu sais pas danser. Les gens ici font genre qu'ils comprennent le mix."
-        )
-        self.rooms.append(salle_house)
-
-        salle_latino = Room(
-            "Salle Latino / Shatta",
-            "Ambiance caliente, déhanchés sérieux, gens qui dansent trop bien pour que " 
-            "tu restes fidèle. Tu hésites entre te laisser tenter ou fuir."
-        )
-        self.rooms.append(salle_latino)
-
-        fumoir = Room(
-            "Fumoir",
-            "Aqua enfumée, discussions philosophiques à 2h du mat, "
-            "et quelqu’un qui parle de lancer un start-up à chaque bouffée."
-        )
-        self.rooms.append(fumoir)
-
-        secret_room = Room(
-            "Secret Room",
-            "Une petite salle cachée dont personne ne connaît vraiment la règle d’accès. "
-            "Si tu es là, soit t’es VIP, soit tu t’es perdu."
-        )
-        self.rooms.append(secret_room)
-
-        rooftop = Room(
-            "Rooftop",
-            "Vue sur la ville, guirlandes lumineuses, air frais qui sauve des coups de chaud. "
-            "Endroit parfait pour pécho ton pain autour d'un verre de rosé."
-        )
-        self.rooms.append(rooftop)
 
 
         # Create inventory items in rooms
@@ -197,18 +163,6 @@ class Game:
         champignons_magiques = Item("champignons_magiques", "Pour une soirée de farfadet où ton cerveau va alluciner. Vas-tu devenir adict ?", 1)
         salle_techno.inventory ["champignons_magiques"] = champignons_magiques
 
-
-        # Create exits for rooms
-        exterieur.exits = {"N" : billetterie, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
-        billetterie.exits = {"N" : None, "E" : vestiaire, "S" : None, "O" : None, "U" : None, "D" : None}
-        vestiaire.exits = {"N" : None, "E" : None, "S" : None, "O" : billetterie, "U" : salle_house, "D" : fumoir}
-        salle_house.exits = {"N" : salle_techno, "E" : None, "S" : None, "O" : salle_latino, "U" : rooftop, "D" : vestiaire}
-        salle_latino.exits = {"N" : salle_rap, "E" : salle_house, "S" : None, "O" : None, "U" : None, "D" : None}
-        salle_rap.exits = {"N" : None, "E" : None, "S" : salle_latino, "O" : None, "U" : None, "D" : None}
-        salle_techno.exits = {"N" : None, "E" : None, "S" : salle_house, "O" : None, "U" : None, "D" : None}
-        rooftop.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : salle_house}
-        fumoir.exits = {"N" : None, "E" : None, "S" : None, "O" : secret_room, "U" : vestiaire, "D" : None}
-        secret_room.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
 
         # PNJ
         # Importer localement Character pour éviter l'import circulaire si on importe `character` directement
@@ -232,10 +186,6 @@ class Game:
 
         #print(self.directions)
 
-        # Setup player and starting room
-
-        self.player = Player(input("\nEntrez votre nom: "))
-        self.player.current_room = exterieur
 
     # Play the game
     def play(self):
