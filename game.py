@@ -1,13 +1,13 @@
 # Description: Game class
-DEBUG = True
 # Import modules
 from room import Room
 from player import Player
 from command import Command
 from actions import Actions
 from item import Item
-from quest import Quest 
+from quest import Quest
 
+DEBUG = True
 class Game:
 
     # Constructor
@@ -73,7 +73,7 @@ class Game:
         self.commands["quest"] = Command("quest"
                                          , "<nom_quête> : afficher les détails d'une quête"
                                          , Actions.quest
-                                         , 1)    
+                                         , 1)
         self.commands["activate"] = Command("activate"
                                            , "<nom_objet> : activer un objet spécial"
                                            , Actions.activate
@@ -83,34 +83,63 @@ class Game:
                                            , Actions.rewards
                                            , 0)
 
-     # Setup rooms   
+     # Setup rooms
     def _setup_rooms(self):
         """Initialize all rooms and their exits."""
         # Create rooms
-        s =  "Exterieur \n Le trottoir devant la boîte : gens qui fument, Uber en warning \n et toi qui as peur de te faire recaler à l'entrée."  
+        s =  "Exterieur " \
+        "\n Le trottoir devant la boîte : gens qui fument, Uber en warning " \
+        "\n et toi qui as peur de te faire recaler à l'entrée."
         exterieur = Room("Exterieur", s)
-        s = "Billetterie \n Petite file, vigile blasé, machine à CB qui fait plus de bruit que la sono. \n Tu pries pour que ta carte passe."
+        
+        s = "Billetterie " \
+        "\n Petite file, vigile blasé, machine à CB qui fait plus de bruit que la sono. " \
+        "\n Tu pries pour que ta carte passe."
         billetterie = Room("Billetterie", s)
-        s = "Vestiaire \n Mega pile de manteaux, ticket froissé dans ta main, et la peur d’oublier \n le numéro à 3h du matin."
+
+        s = "Vestiaire " \
+        "\n Mega pile de manteaux, ticket froissé dans ta main, et la peur d’oublier " \
+        "\n le numéro à 3h du matin."
         vestiaire = Room("Vestiaire", s)
-        s = "Salle Techno \n Stroboscopes, basses qui te font vibrer les organes, DJ qui ne sourit jamais \n mais tout le monde l’adore."
+        
+        s = "Salle Techno " \
+        "\n Stroboscopes, basses qui te font vibrer les organes, DJ qui ne sourit jamais " \
+        "\n mais tout le monde l’adore."
         salle_techno = Room("Salle Techno", s)
-        s = "Salle Rap US / FR \n Ça crie les lyrics plus fort que le son, tout le monde \n fait semblant de connaître tous les couplets."
+        
+        s = "Salle Rap US / FR " \
+        "\n Ça crie les lyrics plus fort que le son, tout le monde " \
+        "\n fait semblant de connaître tous les couplets."
         salle_rap = Room("Salle Rap US / FR", s)
-        s = "Salle House \n Ambiance house, kicks propres, mélodies qui donnent envie de lever les bras \n même si tu sais pas danser. Les gens ici font genre qu'ils comprennent le mix."
+
+        s = "Salle House " \
+        "\n Ambiance house, kicks propres, mélodies qui donnent envie de lever les bras " \
+        "\n même si tu sais pas danser. Les gens ici font genre qu'ils comprennent le mix."
         salle_house = Room("Salle House", s)
-        s = "Salle Latino / Shatta \n Ambiance caliente, déhanchés sérieux, gens qui dansent trop bien pour que \n tu restes fidèle. Tu hésites entre te laisser tenter ou fuir."
+
+        s = "Salle Latino / Shatta " \
+        "\n Ambiance caliente, déhanchés sérieux, gens qui dansent trop bien pour que " \
+        "\n tu restes fidèle. Tu hésites entre te laisser tenter ou fuir."
         salle_latino = Room("Salle Latino / Shatta", s)
-        s = "Fumoir \n Aqua enfumée, discussions philosophiques à 2h du mat, \n et quelqu’un qui parle de lancer un start-up à chaque bouffée."
+
+        s = "Fumoir " \
+        "\n Aqua enfumée, discussions philosophiques à 2h du mat, " \
+        "\n et quelqu’un qui parle de lancer un start-up à chaque bouffée."
         fumoir = Room("Fumoir", s)
-        s = "Secret Room \n Une petite salle cachée dont personne ne connaît vraiment la règle d’accès. \n Si tu es là, soit t’es VIP, soit tu t’es perdu."
+
+        s = "Secret Room " \
+        "\n Une petite salle cachée dont personne ne connaît vraiment la règle d’accès. " \
+        "\n Si tu es là, soit t’es VIP, soit tu t’es perdu."
         secret_room = Room("Secret Room", s)
-        s = "Rooftop \n Vue sur la ville, guirlandes lumineuses, air frais qui sauve des coups de chaud. \n Endroit parfait pour pécho ton pain autour d'un verre de rosé."
+
+        s = "Rooftop " \
+        "\n Vue sur la ville, guirlandes lumineuses, air frais qui sauve des coups de chaud. " \
+        "\n Endroit parfait pour pécho ton pain autour d'un verre de rosé."
         rooftop = Room("Rooftop", s)
 
 
         # Add rooms to game
-        for room in [exterieur, billetterie, vestiaire, salle_techno, salle_rap, salle_house, salle_latino, fumoir, secret_room, rooftop]:  
+        for room in [exterieur, billetterie, vestiaire, salle_techno, salle_rap, salle_house, salle_latino, fumoir, secret_room, rooftop]:
             self.rooms.append(room)
 
 
