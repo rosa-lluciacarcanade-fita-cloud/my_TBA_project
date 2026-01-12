@@ -91,7 +91,7 @@ class Game:
         "\n Le trottoir devant la boîte : gens qui fument, Uber en warning " \
         "\n et toi qui as peur de te faire recaler à l'entrée."
         exterieur = Room("Exterieur", s)
-        
+
         s = "Billetterie " \
         "\n Petite file, vigile blasé, machine à CB qui fait plus de bruit que la sono. " \
         "\n Tu pries pour que ta carte passe."
@@ -101,12 +101,12 @@ class Game:
         "\n Mega pile de manteaux, ticket froissé dans ta main, et la peur d’oublier " \
         "\n le numéro à 3h du matin."
         vestiaire = Room("Vestiaire", s)
-        
+
         s = "Salle Techno " \
         "\n Stroboscopes, basses qui te font vibrer les organes, DJ qui ne sourit jamais " \
         "\n mais tout le monde l’adore."
         salle_techno = Room("Salle Techno", s)
-        
+
         s = "Salle Rap US / FR " \
         "\n Ça crie les lyrics plus fort que le son, tout le monde " \
         "\n fait semblant de connaître tous les couplets."
@@ -139,23 +139,83 @@ class Game:
 
 
         # Add rooms to game
-        for room in [exterieur, billetterie, vestiaire, salle_techno, salle_rap, salle_house, salle_latino, fumoir, secret_room, rooftop]:
+        for room in [exterieur, billetterie, vestiaire, salle_techno, salle_rap,
+                     salle_house, salle_latino, fumoir, secret_room, rooftop]:
             self.rooms.append(room)
 
 
         # Create exits for rooms
-        exterieur.exits = {"N" : billetterie, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
-        billetterie.exits = {"N" : None, "E" : vestiaire, "S" : None, "O" : None, "U" : None, "D" : None}
-        vestiaire.exits = {"N" : None, "E" : None, "S" : None, "O" : billetterie, "U" : salle_house, "D" : fumoir}
-        salle_house.exits = {"N" : salle_techno, "E" : None, "S" : None, "O" : salle_latino, "U" : rooftop, "D" : vestiaire}
-        salle_latino.exits = {"N" : salle_rap, "E" : salle_house, "S" : None, "O" : None, "U" : None, "D" : None}
-        salle_rap.exits = {"N" : None, "E" : None, "S" : salle_latino, "O" : None, "U" : None, "D" : None}
-        salle_techno.exits = {"N" : None, "E" : None, "S" : salle_house, "O" : None, "U" : None, "D" : None}
-        rooftop.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : salle_house}
-        fumoir.exits = {"N" : None, "E" : None, "S" : None, "O" : secret_room, "U" : vestiaire, "D" : None}
-        secret_room.exits = {"N" : None, "E" : None, "S" : None, "O" : None, "U" : None, "D" : None}
+        exterieur.exits = {"N" : billetterie,
+                           "E" : None,
+                           "S" : None,
+                           "O" : None,
+                           "U" : None,
+                           "D" : None}
 
-    # Setup player and starting room    
+        billetterie.exits = {"N" : None,
+                             "E" : vestiaire,
+                             "S" : None,
+                             "O" : None,
+                             "U" : None,
+                             "D" : None}
+
+        vestiaire.exits = {"N" : None,
+                           "E" : None,
+                           "S" : None,
+                           "O" : billetterie,
+                           "U" : salle_house,
+                           "D" : fumoir}
+
+        salle_house.exits = {"N" : salle_techno,
+                             "E" : None,
+                             "S" : None,
+                             "O" : salle_latino,
+                             "U" : rooftop,
+                             "D" : vestiaire}
+
+        salle_latino.exits = {"N" : salle_rap,
+                              "E" : salle_house,
+                              "S" : None,
+                              "O" : None,
+                              "U" : None,
+                              "D" : None}
+
+        salle_rap.exits = {"N" : None,
+                           "E" : None,
+                           "S" : salle_latino,
+                           "O" : None,
+                           "U" : None,
+                           "D" : None}
+
+        salle_techno.exits = {"N" : None,
+                              "E" : None,
+                              "S" : salle_house,
+                              "O" : None,
+                              "U" : None,
+                              "D" : None}
+
+        rooftop.exits = {"N" : None,
+                         "E" : None,
+                         "S" : None,
+                         "O" : None,
+                         "U" : None,
+                         "D" : salle_house}
+
+        fumoir.exits = {"N" : None,
+                        "E" : None,
+                        "S" : None,
+                        "O" : secret_room,
+                        "U" : vestiaire,
+                        "D" : None}
+
+        secret_room.exits = {"N" : None,
+                             "E" : None,
+                             "S" : None,
+                             "O" : None,
+                             "U" : None,
+                             "D" : None}
+
+    # Setup player and starting room
     def _setup_player(self, player_name=None):
         """Initialize the player."""
         if player_name is None:
@@ -184,7 +244,7 @@ class Game:
         ],
         reward="Victoire : VIP avant fermeture 🥂"
     )
-        
+
     # Petite quête secondaire 1 — Pass carré VIP
     pass_carre_VIP_quest = Quest(
         title="Chercher le pass carré VIP",
@@ -223,7 +283,8 @@ class Game:
         title="Le cocktail Daniel",
         description=(
             "Tony le barman a créé un nouveau cocktail à l'éfigie du fameux Daniel. "
-            "Cependant, il n'a plus de sirop magique. Retrouve la bouteille de sirop pour lui, et il te préparera sa spécialité."
+            "\nCependant, il n'a plus de sirop magique. Retrouve la bouteille de sirop pour lui, "
+            "et il te préparera sa spécialité."
         ),
         objectives=[
             "Visiter la salle house",
@@ -253,7 +314,8 @@ class Game:
         title="Retrouve ta pote Anadélys",
         description=(
             "Anadélys a disparu dans la soirée. "
-            "Trouve-la vite avant qu'elle ne soit dans une situation critique. Pour cela tu dois éviter qu'elle boive un mètre de shooter."
+            "Trouve-la vite avant qu'elle ne soit dans une situation critique. "
+            "Pour cela tu dois éviter qu'elle boive un mètre de shooter."
         ),
         objectives=[
             "Visiter la salle rap",
@@ -271,15 +333,21 @@ class Game:
         vestiaire.inventory = {}
 
         # Create items
-        ticket_vestiaire = Item("ticket_vestiaire", "Indispensable pour récupérer ton manteau plus tard.", 1)
+        ticket_vestiaire = Item("ticket_vestiaire",
+                                "Indispensable pour récupérer ton manteau plus tard.", 1)
         vestiaire.inventory ["ticket_vestiaire"] = ticket_vestiaire
-        place_carre_VIP = Item("place_carré_VIP", "Essentiel pour accéder à la soirée de la secret room, seulement pour les plus hots...", 1)
+
+        place_carre_VIP = Item("place_carré_VIP",
+                               "Essentiel pour accéder à la soirée de la secret room, seulement pour les plus hots...", 1)
         salle_rap.inventory ["place_carré_VIP"] = place_carre_VIP
-        sex_on_the_beach = Item("sex_on_the_beach", "Un cocktail sucré et coloré, parfait pour débuter la soirée.", 1)
+        sex_on_the_beach = Item("sex_on_the_beach",
+                                "Un cocktail sucré et coloré, parfait pour débuter la soirée.", 1)
         rooftop.inventory ["sex_on_the_beach"] = sex_on_the_beach
-        un_metre_de_shooter = Item("1_mètre_de_shooter", "Un long shooter à partager, ou non. Ton foie va-t-il résister ?", 1)
+        un_metre_de_shooter = Item("1_mètre_de_shooter",
+                                   "Un long shooter à partager, ou non. Ton foie va-t-il résister ?", 1)
         salle_rap.inventory ["1_mètre_de_shooter"] = un_metre_de_shooter
-        champignons_magiques = Item("champignons_magiques", "Pour une soirée de farfadet où ton cerveau va alluciner. Vas-tu devenir adict ?", 1)
+        champignons_magiques = Item("champignons_magiques", 
+                                    "Pour une soirée de farfadet où ton cerveau va alluciner. Vas-tu devenir adict ?", 1)
         salle_techno.inventory ["champignons_magiques"] = champignons_magiques
 
 
