@@ -23,10 +23,8 @@ class Actions:
         for character in game.characters:
             character.move()
         return True
-    
 
-@staticmethod
-
+    @staticmethod
     def go(game, list_of_words, number_of_parameters):
         """
         Move the player in the direction specified by the parameter.
@@ -92,8 +90,7 @@ class Actions:
         return True
 
 
-@staticmethod
-
+    @staticmethod
     def quit(game, list_of_words, number_of_parameters):
         """
         Quit the game.
@@ -146,8 +143,7 @@ class Actions:
         game.finished = True
         return True
 
-@staticmethod
-
+    @staticmethod
     def help(game, list_of_words, number_of_parameters):
         """
         Print the list of available commands.
@@ -206,8 +202,7 @@ class Actions:
         return True
 
 
-@staticmethod
-    
+    @staticmethod
     def back(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:
@@ -226,8 +221,7 @@ class Actions:
         return True
 
 
-@staticmethod
-    
+    @staticmethod
     def look(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:
@@ -241,8 +235,7 @@ class Actions:
         return True
 
 
-@staticmethod
-
+    @staticmethod
     def take(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:
@@ -267,8 +260,7 @@ class Actions:
         return True
 
 
-@staticmethod
-    
+    @staticmethod
     def drop(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:
@@ -289,8 +281,7 @@ class Actions:
         return True
 
 
-@staticmethod
-
+    @staticmethod
     def check(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:
@@ -303,8 +294,7 @@ class Actions:
         return True
 
 
-@staticmethod
-
+    @staticmethod
     def talk(game, list_of_words, number_of_parameters):
         l = len(list_of_words)
         if l != number_of_parameters + 1:
@@ -329,7 +319,7 @@ class Actions:
         return False
 
 
-@staticmethod
+    @staticmethod
     def quests(game, list_of_words, number_of_parameters):
         """
         Show all quests and their status.

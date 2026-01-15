@@ -219,7 +219,7 @@ class Game:
         # Setup items
         vestiaire.inventory = {
             "ticket_vestiaire": Item("ticket_vestiaire", "Indispensable pour récupérer ton manteau plus tard.", 1),
-            "bouteille_de_sirop_magiques": Item("bouteille_de_sirop_magiques", "Pour une soirée de farfadet où ton cerveau va alluciner. Vas-tu devenir adict ?", 1)
+            "bouteille_de_sirop_magiques": Item("bouteille_de_sirop_magiques", "Pour une soirée de farfadet où ton cerveau va alluciner.", 1)
         }
         salle_rap.inventory = {
             "pass_carré_VIP": Item("pass_carré_VIP", "Essentiel pour accéder à la soirée de la secret room, seulement pour les plus hots...", 1),
@@ -369,46 +369,8 @@ class Game:
             "Retrouver Anadélys",
         ],
         reward="+1 jeton"
-    )
+    )  
 
-    # Setup the game
-    def setup(self):
-
-        # PNJ
-
-
-        daniel_le_farfadet_malicieux = Character("Daniel", "Un petit être espiègle qui aime jouer des tours aux fêtards imprudents.", rooftop, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."])
-        rooftop.characters.append(daniel_le_farfadet_malicieux)
-        self.characters.append(daniel_le_farfadet_malicieux)
-        Anadélys = Character("Anadélys", "Tu sais la pote que tu perds tout le temps car elle part en quête secondaire pendant la soirée, c'est elle !", salle_latino, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."])
-        salle_latino.characters.append(Anadélys)
-        self.characters.append(Anadélys)
-        Tony_le_barman_bg = Character("Tony", "Le barman le plus cool de la boîte, toujours prêt à te servir un cocktail avec le sourire.", salle_house, ["Qu'est-ce que je te sers ce soir ? J'ai des cocktails qui font danser même les plus timides !", "Tu sais, la clé d'une bonne soirée, c'est un bon cocktail et une bonne compagnie.", "Si tu cherches quelque chose de spécial, demande-moi, j'ai des recettes secrètes."])
-        salle_house.characters.append(Tony_le_barman_bg)
-        self.characters.append(Tony_le_barman_bg)
-        vigile_secret_room = Character("Vigile", "Le gardien de la secret room, toujours à l'affût des intrus.", secret_room, ["Hé toi, tu cherches à entrer ici ? Montre-moi ce que t'as dans les poches.", "Seuls les plus méritants peuvent accéder à la secret room. Tu penses en faire partie ?", "Je ne laisse passer que ceux qui ont le pass carré VIP. T'en as un ?"])
-        secret_room.characters.append(vigile_secret_room)
-        self.characters.append(vigile_secret_room)
-        DJ_techno = Character("DJ", "Le maître des platines, toujours à la recherche de nouvelles vibes pour faire bouger la foule.", salle_techno, ["Hey, t'as vu mon casque ? Je peux pas mixer sans lui !", "La musique, c'est la vie. Sans elle, je suis perdu.", "Si tu trouves mon casque, je te serai éternellement reconnaissant."])
-        salle_techno.characters.append(DJ_techno)
-        self.characters.append(DJ_techno)
-        DJ_rap = Character("DJ_Rap", "Le DJ qui fait vibrer la salle avec les meilleurs sons rap US et FR.", salle_rap, ["Yo, t'as déjà entendu le dernier son de Niska ? Ça déchire !", "Le rap, c'est pas juste de la musique, c'est une culture.", "Si tu veux que je te chauffe le public, faut que tu sois à fond dans le délire."])
-        salle_rap.characters.append(DJ_rap)
-        self.characters.append(DJ_rap)
-        DJ_Rosita = Character("DJ_Rosita", "La reine des platines house, toujours prête à faire danser la foule avec ses mixes enflammés.", salle_house, ["Salut toi ! Prêt à bouger sur mes beats ?", "La house, c'est plus qu'un genre musical, c'est un mode de vie.", "Si tu veux que je te prépare un set spécial, faut que tu me montres ton énergie sur le dancefloor."])
-        salle_house.characters.append(DJ_Rosita)
-        self.characters.append(DJ_Rosita)
-        
-
-
-        # Setup directions
-        #print(self.rooms)
-        for room in self.rooms :
-            self.directions.update(room.exits.keys())
-            #print(room.exits.keys())
-            #print(room.name)
-
-        #print(self.directions)
 
 
     # Play the game
