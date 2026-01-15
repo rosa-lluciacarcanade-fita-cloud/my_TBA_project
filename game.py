@@ -6,6 +6,7 @@ from command import Command
 from actions import Actions
 from item import Item
 from quest import Quest
+from character import Character
 
 DEBUG = True
 class Game:
@@ -17,11 +18,11 @@ class Game:
         self.commands = {}
         self.player = None
         self.directions = set()
-        self.characters = []
+        self.characters = {}
 
     # Setup the game
     def setup(self, player_name=None):
-        """Initialize the game with rooms, commands, and quests."""
+        """Initialize the game with  commands, rooms, items, characters and quests."""
         self._setup_commands()
         self._setup_rooms()
         self._setup_player(player_name)
@@ -215,6 +216,51 @@ class Game:
                              "U" : None,
                              "D" : None}
 
+        # Setup items
+        vestiaire.inventory = {
+            "ticket_vestiaire": Item("ticket_vestiaire", "Indispensable pour récupérer ton manteau plus tard.", 1),
+            "bouteille_de_sirop_magiques": Item("bouteille_de_sirop_magiques", "Pour une soirée de farfadet où ton cerveau va alluciner. Vas-tu devenir adict ?", 1)
+        }
+        salle_rap.inventory = {
+            "pass_carré_VIP": Item("pass_carré_VIP", "Essentiel pour accéder à la soirée de la secret room, seulement pour les plus hots...", 1),
+            "un_mètre_de_shooter": Item("un_mètre_de_shooter", "Un long shooter à partager, ou non. Ton foie va-t-il résister ?", 1)
+        }
+        rooftop.inventory = {
+            "sex_on_the_beach": Item("sex_on_the_beach", "Un cocktail sucré et coloré, parfait pour débuter la soirée.", 1)
+        }
+        fumoir.inventory = {
+            "casque_DJ": Item("casque_DJ", "Le casque du DJ, sans lequel elle ne peut pas mixer.", 1),
+        }
+
+        # Setup characters/PNJ
+        salle_house.characters = {
+            "DJ_Rosita": Character("DJ_Rosita", "La reine des platines house, toujours prête à faire danser la foule avec ses mixes enflammés.", salle_house, ["Salut toi ! Prêt à bouger sur mes beats ?", "La house, c'est plus qu'un genre musical, c'est un mode de vie.", "Si tu veux que je te prépare un set spécial, faut que tu me montres ton énergie sur le dancefloor."]),  
+            "Tony_le_barman_bg": Character("Tony", "Le barman le plus cool de la boîte, toujours prêt à te servir un cocktail avec le sourire.", salle_house, ["Qu'est-ce que je te sers ce soir ? J'ai des cocktails qui font danser même les plus timides !", "Tu sais, la clé d'une bonne soirée, c'est un bon cocktail et une bonne compagnie.", "Si tu cherches quelque chose de spécial, demande-moi, j'ai des recettes secrètes."])      
+        }
+        salle_latino.characters = {
+            "Anadélys": Character("Anadélys", "Tu sais la pote que tu perds tout le temps car elle part en quête secondaire pendant la soirée, c'est elle !", salle_latino, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."])
+        }
+        salle_rap.characters = {
+            "DJ_rap": Character("DJ_Rap", "Le DJ qui fait vibrer la salle avec les meilleurs sons rap US et FR.", salle_rap, ["Yo, t'as déjà entendu le dernier son de Niska ? Ça déchire !", "Le rap, c'est pas juste de la musique, c'est une culture.", "Si tu veux que je te chauffe le public, faut que tu sois à fond dans le délire."])
+        }
+        salle_techno.characters = {
+            "DJ_techno": Character("DJ", "Le maître des platines, toujours à la recherche de nouvelles vibes pour faire bouger la foule.", salle_techno, ["Hey, t'as vu mon casque ? Je peux pas mixer sans lui !", "La musique, c'est la vie. Sans elle, je suis perdu.", "Si tu trouves mon casque, je te serai éternellement reconnaissant."])
+        }
+        rooftop.characters = {
+            "Daniel_le_farfadet_malicieux": Character("Daniel", "Un petit être espiègle qui aime jouer des tours aux fêtards imprudents.", rooftop, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."])
+        }
+        secret_room.characters = {
+            "Vigile": Character("Vigile", "Le gardien de la secret room, toujours à l'affût des intrus.", secret_room, ["Hé toi, tu cherches à entrer ici ? Montre-moi ce que t'as dans les poches.", "Seuls les plus méritants peuvent accéder à la secret room. Tu penses en faire partie ?", "Je ne laisse passer que ceux qui ont le pass carré VIP. T'en as un ?"])
+        }
+
+
+
+
+        
+
+        
+        
+
     # Setup player and starting room
     def _setup_player(self, player_name=None):
         """Initialize the player."""
@@ -328,38 +374,8 @@ class Game:
     # Setup the game
     def setup(self):
 
-
-        # Create inventory items in rooms
-        vestiaire.inventory = {}
-
-        # Create items
-        ticket_vestiaire = Item("ticket_vestiaire",
-        "Indispensable pour récupérer ton manteau plus tard.", 1)
-        vestiaire.inventory ["ticket_vestiaire"] = ticket_vestiaire
-
-        pass_carre_VIP = Item("pass_carré_VIP",
-        "Essentiel pour accéder à la soirée de la secret room, seulement pour les plus hots...", 1)
-        salle_rap.inventory ["pass_carré_VIP"] = pass_carre_VIP
-
-        sex_on_the_beach = Item("sex_on_the_beach",
-        "Un cocktail sucré et coloré, parfait pour débuter la soirée.", 1)
-        rooftop.inventory ["sex_on_the_beach"] = sex_on_the_beach
-
-        un_metre_de_shooter = Item("1_mètre_de_shooter",
-        "Un long shooter à partager, ou non. Ton foie va-t-il résister ?", 1)
-        salle_rap.inventory ["1_mètre_de_shooter"] = un_metre_de_shooter
-
-        bouteille_de_sirop_magiques = Item("bouteille_de_sirop_magiques",
-        "Pour une soirée de farfadet où ton cerveau va alluciner. Vas-tu devenir adict ?", 1)
-        vestiaire.inventory ["bouteille_de_sirop_magiques"] = bouteille_de_sirop_magiques
-
-        casque_Rosita = Item("casque_Rosita",
-        "Le casque de Rosa, sans lequel elle ne peut mixer.", 1)
-        fumoir.inventory ["casque_Rosita"] = casque_Rosita
-
-
         # PNJ
-        from character import Character
+
 
         daniel_le_farfadet_malicieux = Character("Daniel", "Un petit être espiègle qui aime jouer des tours aux fêtards imprudents.", rooftop, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."])
         rooftop.characters.append(daniel_le_farfadet_malicieux)
