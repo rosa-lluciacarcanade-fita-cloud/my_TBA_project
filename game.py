@@ -276,7 +276,7 @@ class Game:
         """Initialize all quests."""
         # Quete principale
         main_quest = Quest(
-        title="Survivre à la Nuit",
+        title="Survivre",
         description=(
             "Objectif : survivre jusqu'à la fermeture et entrer dans la salle VIP. "
             "Pas de drama, pas de sécurité, et surtout… assez de jetons."
@@ -289,89 +289,156 @@ class Game:
             "Visiter Secret Room"
         ],
         reward="Victoire : VIP avant fermeture 🥂"
-    )
+        )
 
-    # Petite quête secondaire 1 — Pass carré VIP
-    pass_carre_VIP_quest = Quest(
-        title="Chercher le pass carré VIP",
-        description=(
-            "Un client a perdu son pass d’accès au carré VIP. "
-            "Si tu le retrouves, tu gagnes un jeton et tu pourras infiltrer la secret room."
-        ),
-        objectives=[
-            "Visiter Rooftop",
-            "Fouiller le sol",
-            "Obtenir le pass carré VIP",
-            "Retourner à secret room",
-            "Donner le pass au vigile de la secret room"
-        ],
-        reward="+1 jeton"
-    )
+        # Petite quête secondaire 1 — Pass carré VIP
+        pass_carre_VIP_quest = Quest(
+            title="Chercher le pass carré VIP",
+            description=(
+                "Un client a perdu son pass d’accès au carré VIP. "
+                "Si tu le retrouves, tu gagnes un jeton et tu pourras infiltrer la secret room."
+            ),
+            objectives=[
+                "Visiter Rooftop",
+                "Fouiller le sol",
+                "Obtenir le pass carré VIP",
+                "Retourner à secret room",
+                "Donner le pass au vigile de la secret room"
+            ],
+            reward="+1 jeton"
+        )
 
-    # Petite quête 2 — DJ tête en l'air
-    dj_quest = Quest(
-        title="DJ tête en l'air",
-        description=(
-            "Le DJ a perdu son casque dans la soirée... il ne peut pas commencer son set. "
-            "Si tu l'aides à le retrouver, il te devra une grosse ambiance."
-        ),
-        objectives=[
-            "Parler au DJ",
-            "Visiter le fumoir",
-            "Récupérer le casque du DJ",
-            "Le déposer à la salle techno"
-        ],
-        reward="+1 jeton"
-    )
+        # Petite quête 2 — DJ tête en l'air
+        dj_quest = Quest(
+            title="DJ tête en l'air",
+            description=(
+                "Le DJ a perdu son casque dans la soirée... il ne peut pas commencer son set. "
+                "Si tu l'aides à le retrouver, il te devra une grosse ambiance."
+            ),
+            objectives=[
+                "Parler au DJ",
+                "Visiter le fumoir",
+                "Récupérer le casque du DJ",
+                "Le déposer à la salle techno"
+            ],
+            reward="+1 jeton"
+        )
 
-     # Petite quête 3 — Le cocktail Daniel
-    cocktail_quest = Quest(
-        title="Le cocktail Daniel",
-        description=(
-            "Tony le barman a créé un nouveau cocktail à l'éfigie du fameux Daniel. "
-            "\nCependant, il n'a plus de sirop magique. Retrouve la bouteille de sirop pour lui, "
-            "et il te préparera sa spécialité."
-        ),
-        objectives=[
-            "Visiter la salle house",
-            "Trouver la bouteille de sirop magique au vestiaire",
-            "Déposer le sirop à la salle house."
-        ],
-        reward="+1 jeton"
-    )
+        # Petite quête 3 — Le cocktail Daniel
+        cocktail_quest = Quest(
+            title="Le cocktail Daniel",
+            description=(
+                "Tony le barman a créé un nouveau cocktail à l'éfigie du fameux Daniel. "
+                "\nCependant, il n'a plus de sirop magique. Retrouve la bouteille de sirop pour lui, "
+                "et il te préparera sa spécialité."
+            ),
+            objectives=[
+                "Visiter la salle house",
+                "Trouver la bouteille de sirop magique au vestiaire",
+                "Déposer le sirop à la salle house."
+            ],
+            reward="+1 jeton"
+        )
 
-     # Petite quête 4 — Chauffeur de salle
-    hype_quest = Quest(
-        title="Chauffeur de Salle",
-        description=(
-            "Le DJ Rap cherche quelqu’un pour chauffer le public. "
-            "Pour être l'heureux élu, tu dois avoir bu un sex on the beach au rooftoop..."
-        ),
-        objectives=[
-            "Visiter le rooftop",
-            "Boire un sex on the beach",
-            "Retourner à la salle rap",
-        ],
-        reward="+1 jeton"
-    )
+        # Petite quête 4 — Chauffeur de salle
+        hype_quest = Quest(
+            title="Chauffeur de Salle",
+            description=(
+                "Le DJ Rap cherche quelqu’un pour chauffer le public. "
+                "Pour être l'heureux élu, tu dois avoir bu un sex on the beach au rooftoop..."
+            ),
+            objectives=[
+                "Visiter le rooftop",
+                "Boire un sex on the beach",
+                "Retourner à la salle rap",
+            ],
+            reward="+1 jeton"
+        )
 
-    # Petite quête 5 — Retrouve ta pote Anadélys
-    research_quest = Quest(
-        title="Retrouve ta pote Anadélys",
-        description=(
-            "Anadélys a disparu dans la soirée. "
-            "Trouve-la vite avant qu'elle ne soit dans une situation critique. "
-            "Pour cela tu dois éviter qu'elle boive un mètre de shooter."
-        ),
-        objectives=[
-            "Visiter la salle rap",
-            "Prendre les 1 mètre de shooter",
-            "Retrouver Anadélys",
-        ],
-        reward="+1 jeton"
-    )  
+        # Petite quête 5 — Retrouve ta pote Anadélys
+        research_quest = Quest(
+            title="Retrouve ta pote Anadélys",
+            description=(
+                "Anadélys a disparu dans la soirée. "
+                "Trouve-la vite avant qu'elle ne soit dans une situation critique. "
+                "Pour cela tu dois éviter qu'elle boive un mètre de shooter."
+            ),
+            objectives=[
+                "Visiter la salle rap",
+                "Prendre les 1 mètre de shooter",
+                "Retrouver Anadélys",
+            ],
+            reward="+1 jeton"
+        )
+            
+        # Add all quests to the player's quest manager
+        self.player.quest_manager.add_quest(main_quest)
+        self.player.quest_manager.add_quest(pass_carre_VIP_quest)
+        self.player.quest_manager.add_quest(dj_quest)
+        self.player.quest_manager.add_quest(cocktail_quest)
+        self.player.quest_manager.add_quest(hype_quest)
+        self.player.quest_manager.add_quest(research_quest)
 
 
+
+    # Check if the player has won the game
+    def win(self):
+        """
+        Check if the player has won the game by completing all quests.
+        
+        Returns:
+            bool: True if all quests are completed, False otherwise.
+        """
+        # Get all quests from the player's quest manager
+        all_quests = self.player.quest_manager.quests
+        
+        # If there are no quests, the player cannot win
+        if not all_quests:
+            return False
+        
+        # Check if all quests are completed
+        for quest in all_quests:
+            if not quest.is_completed:
+                return False
+        
+        # All quests are completed
+        return True
+
+    # Check if the player has lost the game
+    def lose(self):
+        """
+        Check if the player has lost the game due to specific conditions.
+        
+        Losing conditions:
+        1. Entering the Secret Room without the "pass carré VIP" item
+        2. Allowing Anadélys to drink the "1 mètre de shooter" (failing the rescue quest)
+        
+        Returns:
+            bool: True if the player has lost, False otherwise.
+        """
+        # Check if the player is in the Secret Room
+        if self.player.current_room.name == "Secret Room":
+            # Check if the player has the "pass carré VIP" item
+            if "pass carré VIP" not in self.player.inventory:
+                print("\n❌ GAME OVER! Tu n'avais pas le pass carré VIP pour accéder à la Secret Room!")
+                print("Le vigile t'a jeté dehors. C'est la fin de ta soirée...\n")
+                return True
+        
+        # Check if Anadélys quest is active and if the player failed to save her
+        for quest in self.player.quest_manager.quests:
+            if quest.title == "Retrouve ta pote Anadélys" and quest.is_active:
+                # If the objective "Prendre les 1 mètre de shooter" is completed but
+                # "Retrouver Anadélys" is not, the player failed to save her in time
+                if ("Prendre les 1 mètre de shooter" in quest.completed_objectives and
+                    "Retrouver Anadélys" not in quest.completed_objectives):
+                    # Check if enough time has passed (e.g., certain number of moves)
+                    if self.player.move_count > 10:
+                        print("\n❌ GAME OVER! Tu n'as pas sauvé Anadélys à temps!")
+                        print("Elle a bu le mètre de shooter... c'est un désastre!\n")
+                        return True
+        
+        # Player has not lost
+        return False
 
     # Play the game
     def play(self):
@@ -379,6 +446,10 @@ class Game:
         self.print_welcome()
         # Loop until the game is finished
         while not self.finished:
+            # Check if the player has lost
+            if self.lose():
+                self.finished = True
+                break
             # Get the command from the player
             self.process_command(input("> "))
         return None

@@ -173,7 +173,7 @@ class Quest:
        '⏳ Collect (1/2 objectifs)'
        """
        if not self.is_active:
-           return f"❓ {self.title} (Non activée)"
+           return f" {self.title} (Non réalisée)"
        if self.is_completed:
            return f"✅ {self.title} (Terminée)"
        completed_count = len(self.completed_objectives)
