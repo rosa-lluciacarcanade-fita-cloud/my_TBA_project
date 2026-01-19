@@ -91,8 +91,8 @@ class Player():
         print("\nVoici les objets dans votre inventaire:")
         for item in self.inventory.values():
             print(f"    - {item}")
-        print()
-
+        print()   
+ 
 
     def add_reward(self, reward):
         """

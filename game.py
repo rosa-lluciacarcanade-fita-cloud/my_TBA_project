@@ -222,14 +222,14 @@ class Game:
             "bouteille_de_sirop_magiques": Item("bouteille_de_sirop_magiques", "Pour une soirée de farfadet où ton cerveau va alluciner.", 1)
         }
         salle_rap.inventory = {
-            "pass_carré_VIP": Item("pass_carré_VIP", "Essentiel pour accéder à la soirée de la secret room, seulement pour les plus hots...", 1),
             "un_mètre_de_shooter": Item("un_mètre_de_shooter", "Un long shooter à partager, ou non. Ton foie va-t-il résister ?", 1)
         }
         rooftop.inventory = {
-            "sex_on_the_beach": Item("sex_on_the_beach", "Un cocktail sucré et coloré, parfait pour débuter la soirée.", 1)
+            "sex_on_the_beach": Item("sex_on_the_beach", "Un cocktail sucré et coloré, parfait pour débuter la soirée.", 1),
+            "pass_carré_VIP": Item("pass_carré_VIP", "Essentiel pour accéder à la soirée de la secret room, seulement pour les plus hots...", 1)
         }
         fumoir.inventory = {
-            "casque_DJ": Item("casque_DJ", "Le casque du DJ, sans lequel elle ne peut pas mixer.", 1),
+            "casque_DJ": Item("casque_DJ", "Le casque du DJ, sans lequel elle ne peut pas mixer.", 1)
         }
 
         # Setup characters/PNJ
@@ -291,6 +291,39 @@ class Game:
         reward="Victoire : VIP avant fermeture 🥂"
         )
 
+        # Quêtes simples 
+        Rooftop_quest = Quest(
+            title="Rooftop",
+            description=(
+                "Visite Rooftop."
+            ),
+            objectives=[
+                "Visiter Rooftop"
+            ],
+            reward="+1 jeton"
+        )
+
+        Cocktail_quest= Quest(
+            title="prendre le sex_on_the_beach",
+            description=(
+                "prendre le sex_on_the_beach"
+            ),
+            objectives=[
+                "prendre le sex_on_the_beach"
+            ],
+            reward="Titre du plus grand alcoolique de la soirée"       
+        )
+
+        Talk_Daniel_quest= Quest(
+            title="parler à Daniel",
+            description=(
+                "parler à Daniel"
+            ),
+            objectives=[
+                "parler avec Daniel"
+            ],
+            reward="+1 jeton"       
+        )
         # Petite quête secondaire 1 — Pass carré VIP
         pass_carre_VIP_quest = Quest(
             title="Chercher le pass carré VIP",
@@ -349,7 +382,7 @@ class Game:
             ),
             objectives=[
                 "Visiter le rooftop",
-                "Boire un sex on the beach",
+                "Prendre un sex on the beach",
                 "Retourner à la salle rap",
             ],
             reward="+1 jeton"
@@ -373,11 +406,14 @@ class Game:
             
         # Add all quests to the player's quest manager
         self.player.quest_manager.add_quest(main_quest)
+        self.player.quest_manager.add_quest(Rooftop_quest)
+        self.player.quest_manager.add_quest(Cocktail_quest)
         self.player.quest_manager.add_quest(pass_carre_VIP_quest)
         self.player.quest_manager.add_quest(dj_quest)
         self.player.quest_manager.add_quest(cocktail_quest)
         self.player.quest_manager.add_quest(hype_quest)
         self.player.quest_manager.add_quest(research_quest)
+
 
 
 

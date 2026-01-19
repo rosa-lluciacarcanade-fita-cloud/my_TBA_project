@@ -6,6 +6,7 @@ class Character:
         self.description = description
         self.current_room = current_room
         self.msgs = msgs
+        self.inventory = {}
 
     def __str__(self):
         return f"{self.name} : {self.description}"

@@ -15,6 +15,8 @@
 MSG0 = "\nLa commande '{command_word}' ne prend pas de paramètre.\n"
 # The MSG1 variable is used when the command takes 1 parameter.
 MSG1 = "\nLa commande '{command_word}' prend 1 seul paramètre.\n"
+# The MSG2 variable is used when the command takes 2 parameters.
+MSG2 = "\nLa commande '{command_word}' prend 2 paramètres.\n"
 
 class Actions:
 
@@ -87,7 +89,8 @@ class Actions:
             player.move(direction)
         else :
             print("\nDirection", direction, "non reconnue")
-        return True
+
+        return True     
 
 
     @staticmethod
@@ -313,6 +316,8 @@ class Actions:
         for pnj in current_room.characters:
             if pnj.name.lower() == Pnj_name or Pnj_name in pnj.name.lower():
                 pnj.get_msg()
+                # Check if talking to this character completes any action objectives
+                player.quest_manager.check_action_objectives("parler", pnj.name)
                 return True
 
         print(f"\nLe personnage '{list_of_words[1]}' n'est pas présent dans cette pièce.\n")
