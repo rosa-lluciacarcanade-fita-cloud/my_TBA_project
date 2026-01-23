@@ -18,7 +18,7 @@ class Room:
     """
 
     # Define the constructor. 
-    def __init__(self, name, description):
+    def __init__(self, name, description, image=None):
         """
        Initialize a Room with a name and description.
       
@@ -33,6 +33,7 @@ class Room:
 
 
         self.name = name
+        self.image = image  # Path to image file (PNG/JPG) for this room
         self.description = description
         self.exits = {}
         self.inventory = {}
