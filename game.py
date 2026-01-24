@@ -568,7 +568,10 @@ class GameGUI(tk.Tk):
         self.game = Game()
 
         # Ask player name via dialog (fallback to 'Joueur')
-        name = simpledialog.askstring("Nom", "Entrez votre nom:", parent=self)
+        try:
+            name = simpledialog.askstring("Nom", "Entrez votre nom:", parent=self)
+        except:
+            name = None
         if not name:
             name = "Joueur"
         self.game.setup(player_name=name)  # Pass name to avoid double prompt
