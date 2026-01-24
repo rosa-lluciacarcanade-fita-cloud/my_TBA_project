@@ -16,7 +16,7 @@ from item import Item
 from quest import Quest
 from character import Character
 
-DEBUG = True
+DEBUG = False
 class Game:
     """Main class for the text-based adventure game."""
 
@@ -631,7 +631,7 @@ class GameGUI(tk.Tk):
 
     def __init__(self):
         super().__init__()
-        self.title("TBA")
+        self.title("L'Anarø CLUB - Aventure Textuelle")
         self.geometry("900x700")  # Provide enough space
         self.minsize(900, 650)
 
