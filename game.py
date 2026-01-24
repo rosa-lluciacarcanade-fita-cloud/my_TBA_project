@@ -99,52 +99,52 @@ class Game:
         s =  "Exterieur " \
         "\n Le trottoir devant la boîte : gens qui fument, Uber en warning " \
         "\n et toi qui as peur de te faire recaler à l'entrée."
-        exterieur = Room("Exterieur", s, image="forest.png")
+        exterieur = Room("Exterieur", s, image="exterieur.png")
 
         s = "Billetterie " \
         "\n Petite file, vigile blasé, machine à CB qui fait plus de bruit que la sono. " \
         "\n Tu pries pour que ta carte passe."
-        billetterie = Room("Billetterie", s, image="tower.png")
+        billetterie = Room("Billetterie", s, image="billetterie.png")
 
         s = "Vestiaire " \
         "\n Mega pile de manteaux, ticket froissé dans ta main, et la peur d’oublier " \
         "\n le numéro à 3h du matin."
-        vestiaire = Room("Vestiaire", s, image="cave.png")
+        vestiaire = Room("Vestiaire", s, image="vestiaire.png")
 
         s = "Salle Techno " \
         "\n Stroboscopes, basses qui te font vibrer les organes, DJ qui ne sourit jamais " \
         "\n mais tout le monde l’adore."
-        salle_techno = Room("Salle Techno", s, image="cottage.png")
+        salle_techno = Room("Salle Techno", s, image="salle_techno.png")
 
         s = "Salle Rap US / FR " \
         "\n Ça crie les lyrics plus fort que le son, tout le monde " \
         "\n fait semblant de connaître tous les couplets."
-        salle_rap = Room("Salle Rap US / FR", s, image="swamp.png")
+        salle_rap = Room("Salle Rap US / FR", s, image="salle_rap.png")
 
         s = "Salle House " \
         "\n Ambiance house, kicks propres, mélodies qui donnent envie de lever les bras " \
         "\n même si tu sais pas danser. Les gens ici font genre qu'ils comprennent le mix."
-        salle_house = Room("Salle House", s, image="castle.png")
+        salle_house = Room("Salle House", s, image="salle_house.png")
 
         s = "Salle Latino / Shatta " \
         "\n Ambiance caliente, déhanchés sérieux, gens qui dansent trop bien pour que " \
         "\n tu restes fidèle. Tu hésites entre te laisser tenter ou fuir."
-        salle_latino = Room("Salle Latino / Shatta", s, image="castle.png")
+        salle_latino = Room("Salle Latino / Shatta", s, image="salle_latino.png")
 
         s = "Fumoir " \
         "\n Aqua enfumée, discussions philosophiques à 2h du mat, " \
         "\n et quelqu’un qui parle de lancer un start-up à chaque bouffée."
-        fumoir = Room("Fumoir", s, image="castle.png")
+        fumoir = Room("Fumoir", s, image="fumoir.png")
 
         s = "Secret Room " \
         "\n Une petite salle cachée dont personne ne connaît vraiment la règle d’accès. " \
         "\n Si tu es là, soit t’es VIP, soit tu t’es perdu."
-        secret_room = Room("Secret Room", s, image="castle.png")
+        secret_room = Room("Secret Room", s, image="secret_room.png")
 
         s = "Rooftop " \
         "\n Vue sur la ville, guirlandes lumineuses, air frais qui sauve des coups de chaud. " \
         "\n Endroit parfait pour pécho ton pain autour d'un verre de rosé."
-        rooftop = Room("Rooftop", s, image="castle.png")
+        rooftop = Room("Rooftop", s, image="rooftop.png")
 
 
         # Add rooms to game
@@ -703,9 +703,14 @@ class GameGUI(tk.Tk):
         room = self.game.player.current_room
         assets_dir = Path(__file__).parent / 'assets'
 
-        # Use room-specific image if available, otherwise fallback
+        # Use room-specific image if available (try PPM first, then PNG)
         if room.image:
-            image_path = assets_dir / room.image
+            # Try PPM first (converted from PNG), then PNG
+            ppm_path = assets_dir / room.image.replace('.png', '.ppm')
+            if ppm_path.exists():
+                image_path = ppm_path
+            else:
+                image_path = assets_dir / room.image
         else:
             image_path = assets_dir / 'scene.png'
 
