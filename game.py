@@ -612,6 +612,7 @@ class GameGUI(tk.Tk):
         self._btn_descendre = tk.PhotoImage(file=str(assets_dir / 'descendre-arrow-50.png'))
         self._btn_back = tk.PhotoImage(file=str(assets_dir / 'back-50.png'))
         self._btn_look = tk.PhotoImage(file=str(assets_dir / 'look-50.png'))
+        self._btn_check = tk.PhotoImage(file=str(assets_dir / 'check-50.png'))
         self._btn_quit = tk.PhotoImage(file=str(assets_dir / 'quit-50.png'))
 
         # Command buttons
@@ -659,6 +660,12 @@ class GameGUI(tk.Tk):
                   image=self._btn_look,
                   command=lambda: self._send_command("look"),
                   bd=0).grid(row=2, column=0, sticky="ew", pady=(5,2))
+        
+        # Check inventory button
+        tk.Button(buttons_frame,
+                  image=self._btn_check,
+                  command=lambda: self._send_command("check"),
+                  bd=0).grid(row=2, column=0, sticky="ew", pady=(6,2))
         
 
         # Quit button
