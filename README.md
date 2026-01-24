@@ -1,16 +1,36 @@
-# TBA
+# L’Anarø CLUB — Jeu d’aventure textuel (CLI + GUI)
 
-Ce repo contient la première version (minimale) du jeu d’aventure TBA.
+Bienvenue dans **L’Anarø CLUB**, un jeu d’aventure textuel en Python où tu dois survivre à une nuit en boîte, enchaîner les salles, parler aux PNJ, récupérer des objets… et tenter d’infiltrer la **Secret Room**.
 
-Les lieux sont au nombre de 6. Il n'y a pas encore d’objets ni de personnages autres que le joueur et très peu d’interactions. Cette première version sert de base à ce qui va suivre, et sera améliorée au fur et à mesure.
+---
 
+## Guide utilisateur
 
-## Structuration
+### 1) Description du jeu
 
-Il y a pour le moment 5 modules contenant chacun une classe.
+**Univers :**  
+Tu arrives devant une boîte de nuit, et tu vas naviguer entre plusieurs espaces : billetterie, vestiaire, salles musicales (techno / rap / house / latino), fumoir, rooftop et la fameuse **Secret Room**.
 
-- `game.py` / `Game` : description de l'environnement, interface avec le joueur ;
-- `room.py` / `Room` : propriétés génériques d'un lieu  ;
-- `player.py` / `Player` : le joueur ;
-- `command.py` / `Command` : les consignes données par le joueur ;
-- `actions.py` / `Action` : les interactions entre .
+**Objectif principal :**  
+Réussir à t’infiltrer dans la **Secret Room**.
+
+**Conditions de victoire :**
+- Entrer dans la **Secret Room** (et ne pas se faire recaler).
+
+**Conditions de défaite :**
+- Entrer dans la **Secret Room** sans le **pass carré VIP**.
+- Échouer certaines quêtes critiques (ex : Anadélys en PLS si tu traînes trop).
+
+---
+
+### 2) Installation
+
+#### Prérequis
+- Python **3.10+** recommandé
+- Tkinter (souvent déjà inclus avec Python)
+
+#### Récupérer le projet
+Cloner / télécharger le dossier puis se placer dedans :
+
+```bash
+cd votre_dossier

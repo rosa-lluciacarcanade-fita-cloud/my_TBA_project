@@ -18,6 +18,7 @@ from character import Character
 
 DEBUG = True
 class Game:
+    """Main class for the text-based adventure game."""
 
     # Constructor
     def __init__(self):
@@ -227,55 +228,145 @@ class Game:
 
         # Setup items
         vestiaire.inventory = {
-            "ticket_vestiaire": Item("ticket_vestiaire", "Indispensable pour récupérer ton manteau plus tard.", 1),
-            "bouteille_de_sirop_magiques": Item("bouteille_de_sirop_magiques", "Pour une soirée de farfadet où ton cerveau va alluciner.", 1)
+            "ticket_vestiaire": Item(
+                "ticket_vestiaire",
+                "Indispensable pour récupérer ton manteau plus tard.",
+                1),
+            "bouteille_de_sirop_magiques": Item(
+                "bouteille_de_sirop_magiques",
+                "Pour une soirée de farfadet où ton cerveau va alluciner.",
+                1)
         }
         salle_rap.inventory = {
-            "un_mètre_de_shooter": Item("un_mètre_de_shooter", "Un long shooter à partager, ou non. Ton foie va-t-il résister ?", 1)
+            "un_mètre_de_shooter": Item(
+                "un_mètre_de_shooter",
+                "Un long shooter à partager, ou non. Ton foie va-t-il " +
+                "résister ?",
+                1)
         }
         rooftop.inventory = {
-            "sex_on_the_beach": Item("sex_on_the_beach", "Un cocktail sucré et coloré, parfait pour débuter la soirée.", 1),
-            "pass_carré_VIP": Item("pass_carré_VIP", "Essentiel pour accéder à la soirée de la secret room, seulement pour les plus hots...", 1)
+            "sex_on_the_beach": Item(
+                "sex_on_the_beach",
+                "Un cocktail sucré et coloré, parfait pour débuter " +
+                "la soirée.",
+                1),
+            "pass_carré_VIP": Item(
+                "pass_carré_VIP",
+                "Essentiel pour accéder à la soirée de la secret room, " +
+                "seulement pour les plus hots...",
+                1)
         }
         fumoir.inventory = {
-            "casque_DJ": Item("casque_DJ", "Le casque de Rosa, sans lequel elle ne peut pas mixer.", 1)
+            "casque_DJ": Item(
+                "casque_DJ",
+                "Le casque de Rosa, sans lequel elle ne peut pas mixer.",
+                1)
         }
 
         # Setup characters/PNJ
         salle_house.characters = [
-            Character("DJ_Rosita", "La reine des platines house, toujours prête à faire danser la foule avec ses mixes enflammés.", salle_house, ["Salut toi ! Prêt à bouger sur mes beats ?", "La house, c'est plus qu'un genre musical, c'est un mode de vie.", "Si tu veux que je te prépare un set spécial, faut que tu me montres ton énergie sur le dancefloor."]),  
-           ]
+            Character(
+                "DJ_Rosita",
+                "La reine des platines house, toujours prête à faire " +
+                "danser la foule avec ses mixes enflammés.",
+                salle_house,
+                ["Salut toi ! Prêt à bouger sur mes beats ?",
+                 "La house, c'est plus qu'un genre musical, c'est un " +
+                 "mode de vie.",
+                 "Si tu veux que je te prépare un set spécial, faut que " +
+                 "tu me montres ton énergie sur le dancefloor."]),
+        ]
         salle_latino.characters = [
-            Character("Anadélys", "Tu sais la pote que tu perds tout le temps car elle part en quête secondaire pendant la soirée, c'est elle !", salle_latino, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."]),
-            Character("Tony", "Le barman le plus cool de la boîte, toujours prêt à te servir un cocktail avec le sourire.", salle_house, ["Qu'est-ce que je te sers ce soir ? J'ai des cocktails qui font danser même les plus timides !", "Tu sais, la clé d'une bonne soirée, c'est un bon cocktail et une bonne compagnie.", "Si tu cherches quelque chose de spécial, demande-moi, j'ai des recettes secrètes."])
+            Character(
+                "Anadélys",
+                "Tu sais la pote que tu perds tout le temps car elle " +
+                "part en quête secondaire pendant la soirée, c'est elle !",
+                salle_latino,
+                ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te " +
+                 "faut...",
+                 "Attention à ne pas te perdre dans la danse, ou tu " +
+                 "pourrais finir comme moi, coincé ici pour l'éternité !",
+                 "Un conseil d'ami : ne sous-estime jamais le pouvoir " +
+                 "d'une bonne salsa pour charmer la foule."]),
+            Character(
+                "Tony",
+                "Le barman le plus cool de la boîte, toujours prêt à " +
+                "te servir un cocktail avec le sourire.",
+                salle_house,
+                ["Qu'est-ce que je te sers ce soir ? J'ai des cocktails " +
+                 "qui font danser même les plus timides !",
+                 "Tu sais, la clé d'une bonne soirée, c'est un bon " +
+                 "cocktail et une bonne compagnie.",
+                 "Si tu cherches quelque chose de spécial, demande-moi, " +
+                 "j'ai des recettes secrètes."])
         ]
         salle_rap.characters = [
-            Character("DJ_Rap", "Le DJ qui fait vibrer la salle avec les meilleurs sons rap US et FR.", salle_rap, ["Yo, t'as déjà entendu le dernier son de Niska ? Ça déchire !", "Le rap, c'est pas juste de la musique, c'est une culture.", "Si tu veux que je te chauffe le public, faut que tu sois à fond dans le délire."])
+            Character(
+                "DJ_Rap",
+                "Le DJ qui fait vibrer la salle avec les meilleurs " +
+                "sons rap US et FR.",
+                salle_rap,
+                ["Yo, t'as déjà entendu le dernier son de Niska ? Ça " +
+                 "déchire !",
+                 "Le rap, c'est pas juste de la musique, c'est une " +
+                 "culture.",
+                 "Si tu veux que je te chauffe le public, faut que tu " +
+                 "sois à fond dans le délire."])
         ]
         salle_techno.characters = [
-            Character("DJ", "Le maître des platines, toujours à la recherche de nouvelles vibes pour faire bouger la foule.", salle_techno, ["Hey, t'as vu mon casque ? Je peux pas mixer sans lui !", "La musique, c'est la vie. Sans elle, je suis perdu.", "Si tu trouves mon casque, je te serai éternellement reconnaissant."])
+            Character(
+                "DJ",
+                "Le maître des platines, toujours à la recherche de " +
+                "nouvelles vibes pour faire bouger la foule.",
+                salle_techno,
+                ["Hey, t'as vu mon casque ? Je peux pas mixer sans lui !",
+                 "La musique, c'est la vie. Sans elle, je suis perdu.",
+                 "Si tu trouves mon casque, je te serai éternellement " +
+                 "reconnaissant."])
         ]
         rooftop.characters = [
-            Character("Daniel", "Un petit être espiègle qui aime jouer des tours aux fêtards imprudents.", rooftop, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."])
+            Character(
+                "Daniel",
+                "Un petit être espiègle qui aime jouer des tours aux " +
+                "fêtards imprudents.",
+                rooftop,
+                ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te " +
+                 "faut...",
+                 "Attention à ne pas te perdre dans la danse, ou tu " +
+                 "pourrais finir comme moi, coincé ici pour l'éternité !",
+                 "Un conseil d'ami : ne sous-estime jamais le pouvoir " +
+                 "d'une bonne salsa pour charmer la foule."])
         ]
         fumoir.characters = [
-            Character("Secret_vigile", "Le gardien de la secret room, toujours à l'affût des intrus.", fumoir, ["Hé toi, tu cherches à entrer ici ? Montre-moi ce que t'as dans les poches.", "Seuls les plus méritants peuvent accéder à la secret room. Tu penses en faire partie ?", "Je ne laisse passer que ceux qui ont le pass carré VIP. T'en as un ?"])
+            Character(
+                "Secret_vigile",
+                "Le gardien de la secret room, toujours à l'affût des " +
+                "intrus.",
+                fumoir,
+                ["Hé toi, tu cherches à entrer ici ? Montre-moi ce que " +
+                 "t'as dans les poches.",
+                 "Seuls les plus méritants peuvent accéder à la secret " +
+                 "room. Tu penses en faire partie ?",
+                 "Je ne laisse passer que ceux qui ont le pass carré VIP. " +
+                 "T'en as un ?"])
         ]
         vestiaire.characters = [
-            Character("Dora", "La fille du vestiaire, toujours prête à aider les fêtards à retrouver leurs affaires.", vestiaire, ["Salut ! T'as perdu quelque chose ?", "Le vestiaire, c'est un vrai labyrinthe. Faut faire gaffe à pas se perdre ici.", "Si tu retrouves ton ticket de vestiaire, je donne ton manteau."])
+            Character(
+                "Dora",
+                "La fille du vestiaire, toujours prête à aider les " +
+                "fêtards à retrouver leurs affaires.",
+                vestiaire,
+                ["Salut ! T'as perdu quelque chose ?",
+                 "Le vestiaire, c'est un vrai labyrinthe. Faut faire " +
+                 "gaffe à pas se perdre ici.",
+                 "Si tu retrouves ton ticket de vestiaire, je donne ton " +
+                 "manteau."])
         ]
-        
+
         # Collect all characters into game.characters for movement
         for room in self.rooms:
             for character in room.characters:
                 self.characters.append(character)
-
-
-
-        
-
-        
-        
 
     # Setup player and starting room
     def _setup_player(self, player_name=None):
@@ -336,7 +427,7 @@ class Game:
             objectives=[
                 "parler avec Daniel"
             ],
-            reward="Un nouveau bestie Daniel le farfadet"       
+            reward="Un nouveau bestie Daniel le farfadet"
         )
 
         # Petite quête 2 — DJ Rosa
@@ -357,8 +448,10 @@ class Game:
         Cocktail_quest = Quest(
             title="Le cocktail Daniel",
             description=(
-                "Tony le barman a créé un nouveau cocktail à l'éfigie du fameux Daniel le farfadet malicieux. "
-                "\nCependant, il n'a plus de sirop magique. Retrouve la bouteille de sirop pour lui, "
+                "Tony le barman a créé un nouveau cocktail à l'éfigie " +
+                "du fameux Daniel le farfadet malicieux. " +
+                "\nCependant, il n'a plus de sirop magique. Retrouve " +
+                "la bouteille de sirop pour lui, " +
                 "et il te préparera sa spécialité."
             ),
             objectives=[
@@ -374,7 +467,7 @@ class Game:
             description=(
                 "Anadélys a disparu dans la soirée. "
                 "Trouve-la vite avant qu'elle ne soit dans une situation critique. "
-                "Pour cela tu dois éviter qu'elle boive un mètre de shooter." 
+                "Pour cela tu dois éviter qu'elle boive un mètre de shooter."
             ),
             objectives=[
                 "Prendre un_mètre_de_shoote",
@@ -382,7 +475,7 @@ class Game:
             ],
             reward="Anadélys en pétard, vous allez bien vous amuser ensemble !"
         )
-            
+
         # Add all quests to the player's quest manager
         self.player.quest_manager.add_quest(Secret_room_quest)
         self.player.quest_manager.add_quest(Manteau_quest)
@@ -392,33 +485,30 @@ class Game:
         self.player.quest_manager.add_quest(research_quest)
         self.player.quest_manager.add_quest(Rosa_quest)
 
-
-
-
     # Check if the player has won the game
     def win(self):
         """
         Check if the player has won the game by completing all quests.
-        
+
         Returns:
             bool: True if all quests are completed, False otherwise.
         """
         # Get all quests from the player's quest manager
         all_quests = self.player.quest_manager.quests
-        
+
         # If there are no quests, the player cannot win
         if not all_quests:
             return False
-        
+
         if self.player.current_room.name == "Secret Room":
             print("\n🎉 FÉLICITATIONS! TU AS RÉUSSI À T'INFILTRER DANS LA SECRET ROOM !\n")
             return True
-        
+
         # Check if all quests are completed
         for quest in all_quests:
             if not quest.is_completed:
                 return False
-        
+
         # All quests are completed
         return True
 
@@ -426,11 +516,11 @@ class Game:
     def lose(self):
         """
         Check if the player has lost the game due to specific conditions.
-        
+
         Losing conditions:
         1. Entering the Secret Room without the "pass carré VIP" item
         2. Allowing Anadélys to drink the "1 mètre de shooter" (failing the rescue quest)
-        
+
         Returns:
             bool: True if the player has lost, False otherwise.
         """
@@ -438,10 +528,12 @@ class Game:
         if self.player.current_room.name == "Secret Room":
             # Check if the player has the "pass carré VIP" item
             if "pass carré VIP" not in self.player.inventory:
-                print("\n❌ GAME OVER! Tu n'avais pas le pass carré VIP pour accéder à la Secret Room!")
-                print("Le vigile t'a jeté dehors. C'est la fin de ta soirée...\n")
+                print("\n❌ GAME OVER! Tu n'avais pas le pass carré VIP " +
+                      "pour accéder à la Secret Room!")
+                print("Le vigile t'a jeté dehors. C'est la fin de ta " +
+                      "soirée...\n")
                 return True
-        
+
         # Check if Anadélys quest is active and if the player failed to save her
         for quest in self.player.quest_manager.quests:
             if quest.title == "Retrouve ta pote Anadélys" and quest.is_active:
@@ -454,7 +546,7 @@ class Game:
                         print("\n❌ GAME OVER! Tu n'as pas sauvé Anadélys à temps!")
                         print("Elle a bu un mètre de shooter toute seule... c'est un désastre!\n")
                         return True
-        
+
         # Player has not lost
         return False
 
@@ -476,17 +568,20 @@ class Game:
 
     # Process the command entered by the player
     def process_command(self, command_string) -> None:
+        """Process the command entered by the player."""
 
         # Split the command string into a list of words
         list_of_words = command_string.split(" ")
 
         command_word = list_of_words[0]
 
-        # If the command is not recognized, print an error message*
+        # If the command is not recognized, print an error message
         if command_word == "":
             return None
         elif command_word not in self.commands.keys():
-            print(f"\nCommande '{command_word}' non reconnue. Entrez 'help' pour voir la liste des commandes disponibles.\n")
+            print(f"\nCommande '{command_word}' non reconnue. Entrez " +
+                  "'help' pour voir la liste des commandes " +
+                  "disponibles.\n")
         # If the command is recognized, execute it
         else:
             command = self.commands[command_word]
@@ -494,6 +589,7 @@ class Game:
 
     # Print the welcome message
     def print_welcome(self):
+        """Print the welcome message at the start of the game."""
         print(f"\nBienvenue {self.player.name} dans L'Anarø CLUB !")
         print("Entrez 'help' si vous avez besoin d'aide.")
         #
@@ -620,7 +716,7 @@ class GameGUI(tk.Tk):
                   image=self._btn_help,
                   command=lambda: self._send_command("help"),
                   bd=0).grid(row=0, column=0, sticky="ew", pady=2)
-        
+
         # Movement buttons (N,E,S,O)
         move_frame = ttk.LabelFrame(buttons_frame, text="Déplacements")
         move_frame.grid(row=1, column=0, sticky="ew", pady=4)
@@ -648,28 +744,28 @@ class GameGUI(tk.Tk):
                   image=self._btn_descendre,
                   command=lambda: self._send_command("go D"),
                   bd=0).grid(row=3, column=1)
-        
+
         # Back button
         tk.Button(buttons_frame,
                   text="Back",
                   command=lambda: self._send_command("back"),
                   bg="#444",
                   fg="#eee").grid(row=2, column=0, sticky="ew", pady=(2,2))
-        
+
         # Look button
         tk.Button(buttons_frame,
                   text="Look",
                   command=lambda: self._send_command("look"),
                   bg="#444",
                   fg="#eee").grid(row=3, column=0, sticky="ew", pady=(2,2))
-        
+
         # Check inventory button
         tk.Button(buttons_frame,
                   text="Check",
                   command=lambda: self._send_command("check"),
                   bg="#444",
                   fg="#eee").grid(row=4, column=0, sticky="ew", pady=(2,2))
-        
+
 
         # Quit button
         tk.Button(buttons_frame,

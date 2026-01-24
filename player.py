@@ -1,7 +1,8 @@
-# Define the Player class.
-
+"""Module containing the Player class for managing the game player."""
 
 from quest import QuestManager
+
+
 class Player():
     """"
     This class represents the player and the room where he is .
@@ -37,8 +38,6 @@ class Player():
         []
         """
 
-
-        
         self.name = name
         self.current_room = None
         self.history = []
@@ -52,6 +51,7 @@ class Player():
 
     # Define the move method.
     def move(self, direction):
+        """ Move the player in the specified direction."""
         # Get the next room from the exits dictionary of the current room.
         next_room = self.current_room.exits[direction]
 
@@ -59,13 +59,12 @@ class Player():
         if next_room is None:
             print("\nAucune porte dans cette direction !\n")
             return False
-        
+
         # Set the current room to the next room.
         self.history.append(self.current_room)
         self.current_room = next_room
         print(self.current_room.get_long_description())
         self.get_history()
-        
         # Check room visit objectives
         self.quest_manager.check_room_objectives(self.current_room.name)
 
@@ -75,7 +74,8 @@ class Player():
 
         return True
 
-    def get_history (self):
+    def get_history(self):
+        """Affiche l'historique des pièces visitées par le joueur."""
         print (f"\nVous avez déjà visité les pièces suivantes:")
         for pieces in self.history:
             # `pieces` est un objet Room ; afficher son nom si possible
@@ -85,14 +85,14 @@ class Player():
                 print(f"    - {pieces}")
 
     def get_inventory(self):
+        """Affiche le contenu de l'inventaire du joueur."""
         if not self.inventory:
             print("\nVotre inventaire est vide.\n")
             return
         print("\nVoici les objets dans votre inventaire:")
         for item in self.inventory.values():
             print(f"    - {item}")
-        print()   
- 
+        print()
 
     def add_reward(self, reward):
         """
@@ -149,6 +149,3 @@ class Player():
             for reward in self.rewards:
                 print(f"  • {reward}")
             print()
-    
-
-

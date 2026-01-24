@@ -1,4 +1,5 @@
-# Define the Room class.
+"""Module containing the Room class for game rooms."""
+
 
 class Room:
     """"
@@ -17,7 +18,7 @@ class Room:
     >>>
     """
 
-    # Define the constructor. 
+    # Define the constructor.
     def __init__(self, name, description, image=None):
         """
        Initialize a Room with a name and description.
@@ -38,7 +39,7 @@ class Room:
         self.exits = {}
         self.inventory = {}
         self.characters = []
-    
+
     # Define the get_exit method.
     def get_exit(self, direction):
         """
@@ -57,7 +58,7 @@ class Room:
             return self.exits[direction]
         else:
             return None
-    
+
     # Return a string describing the room's exits.
     def get_exit_string(self):
         """
@@ -71,7 +72,7 @@ class Room:
        >>> room1.get_exit_string() # doctest: +ELLIPSIS
        'Sorties: ...
        """
-        exit_string = "Sorties: " 
+        exit_string = "Sorties: "
         for exit in self.exits.keys():
             if self.exits.get(exit) is not None:
                 exit_string += exit + ", "
@@ -96,7 +97,7 @@ class Room:
         return f"\n{self.description}\n\n{self.get_exit_string()}\n"
 
     def get_inventory(self):
-        # Affiche les items et des personnages non joueurs présents dans la pièce.
+        """Affiche les items et des personnages non joueurs présents dans la pièce."""
         if not self.inventory and not self.characters:
             print("\nIl n'y a aucun objet ni personnage dans cette pièce.\n")
             return
@@ -111,13 +112,13 @@ class Room:
         print()
 
     def add_characters(self, character):
+        """Ajoute un personnage non joueur à la pièce. """
         if character not in self.characters:
             self.characters.append(character)
             character.current_room = self
 
     def remove_characters(self, character):
+        """Retire un personnage non joueur de la pièce. """
         if character in self.characters:
             self.characters.remove(character)
             character.current_room = None
-    
-
