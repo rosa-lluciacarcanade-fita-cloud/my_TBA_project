@@ -568,10 +568,7 @@ class GameGUI(tk.Tk):
         self.game = Game()
 
         # Ask player name via dialog (fallback to 'Joueur')
-        try:
-            name = simpledialog.askstring("Nom", "Entrez votre nom:", parent=self)
-        except:
-            name = None
+        name = simpledialog.askstring("Nom", "Entrez votre nom:", parent=self)
         if not name:
             name = "Joueur"
         self.game.setup(player_name=name)  # Pass name to avoid double prompt
@@ -632,12 +629,12 @@ class GameGUI(tk.Tk):
         assets_dir = Path(__file__).parent / 'assets'
         # Load pre-resized 50x50 PNG images for better quality
         self._btn_help = tk.PhotoImage(file=str(assets_dir / 'help-50.png'))
-        self._btn_nord = tk.PhotoImage(file=str(assets_dir / 'nord-arrow-50.png'))
-        self._btn_sud = tk.PhotoImage(file=str(assets_dir / 'sud-arrow-50.png'))
-        self._btn_ouest = tk.PhotoImage(file=str(assets_dir / 'ouest-arrow-50.png'))
-        self._btn_est = tk.PhotoImage(file=str(assets_dir / 'est-arrow-50.png'))
         self._btn_up = tk.PhotoImage(file=str(assets_dir / 'up-arrow-50.png'))
         self._btn_down = tk.PhotoImage(file=str(assets_dir / 'down-arrow-50.png'))
+        self._btn_left = tk.PhotoImage(file=str(assets_dir / 'left-arrow-50.png'))
+        self._btn_right = tk.PhotoImage(file=str(assets_dir / 'right-arrow-50.png'))
+        self._btn_monter = tk.PhotoImage(file=str(assets_dir / 'monter-arrow-50.png'))
+        self._btn_descendre = tk.PhotoImage(file=str(assets_dir / 'descendre-arrow-50.png'))
         self._btn_quit = tk.PhotoImage(file=str(assets_dir / 'quit-50.png'))
 
         # Command buttons
@@ -650,27 +647,27 @@ class GameGUI(tk.Tk):
         move_frame = ttk.LabelFrame(buttons_frame, text="Déplacements")
         move_frame.grid(row=1, column=0, sticky="ew", pady=4)
         tk.Button(move_frame,
-                  image=self._btn_nord,
+                  image=self._btn_up,
                   command=lambda: self._send_command("go N"),
                   bd=0).grid(row=0, column=0, columnspan=2)
         tk.Button(move_frame,
-                  image=self._btn_ouest,
+                  image=self._btn_left,
                   command=lambda: self._send_command("go O"),
                   bd=0).grid(row=1, column=0)
         tk.Button(move_frame,
-                  image=self._btn_est,
+                  image=self._btn_right,
                   command=lambda: self._send_command("go E"),
                   bd=0).grid(row=1, column=1)
         tk.Button(move_frame,
-                  image=self._btn_sud,
+                  image=self._btn_down,
                   command=lambda: self._send_command("go S"),
                   bd=0).grid(row=2, column=0, columnspan=2)
         tk.Button(move_frame,
-                  image=self._btn_up,
+                  image=self._btn_monter,
                   command=lambda: self._send_command("go U"),
                   bd=0).grid(row=3, column=0)
         tk.Button(move_frame,
-                  image=self._btn_down,
+                  image=self._btn_descendre,
                   command=lambda: self._send_command("go D"),
                   bd=0).grid(row=3, column=1)
 
