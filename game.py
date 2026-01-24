@@ -651,28 +651,31 @@ class GameGUI(tk.Tk):
         
         # Back button
         tk.Button(buttons_frame,
-                  image=self._btn_back,
+                  text="Back",
                   command=lambda: self._send_command("back"),
-                  bd=0).grid(row=2, column=0, sticky="ew", pady=(2,2))
+                  bg="#444",
+                  fg="#eee").grid(row=2, column=0, sticky="ew", pady=(2,2))
         
         # Look button
         tk.Button(buttons_frame,
-                  image=self._btn_look,
+                  text="Look",
                   command=lambda: self._send_command("look"),
-                  bd=0).grid(row=2, column=0, sticky="ew", pady=(5,2))
+                  bg="#444",
+                  fg="#eee").grid(row=3, column=0, sticky="ew", pady=(2,2))
         
         # Check inventory button
         tk.Button(buttons_frame,
-                  image=self._btn_check,
+                  text="Check",
                   command=lambda: self._send_command("check"),
-                  bd=0).grid(row=2, column=0, sticky="ew", pady=(6,2))
+                  bg="#444",
+                  fg="#eee").grid(row=4, column=0, sticky="ew", pady=(2,2))
         
 
         # Quit button
         tk.Button(buttons_frame,
                   image=self._btn_quit,
                   command=lambda: self._send_command("quit"),
-                  bd=0).grid(row=2, column=0, sticky="ew", pady=(8,2))
+                  bd=0).grid(row=5, column=0, sticky="ew", pady=(2,2))
 
         # L2 Terminal output area (Text + Scrollbar)
         output_frame = ttk.Frame(self)
