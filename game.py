@@ -651,7 +651,7 @@ class GameGUI(tk.Tk):
         
         # Back button
         tk.Button(buttons_frame,
-                  image=self._bnt_back,
+                  image=self._btn_back,
                   command=lambda: self._send_command("back"),
                   bd=0).grid(row=2, column=0, sticky="ew", pady=(2,2))
         
