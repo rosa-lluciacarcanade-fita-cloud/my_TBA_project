@@ -26,7 +26,7 @@ class Game:
         self.commands = {}
         self.player = None
         self.directions = set()
-        self.characters = {}
+        self.characters = []
 
     # Setup the game
     def setup(self, player_name=None):
@@ -97,53 +97,54 @@ class Game:
         """Initialize all rooms and their exits."""
         # Create rooms
         s =  "Exterieur " \
-        "\n Le trottoir devant la boîte : gens qui fument, Uber en warning " \
-        "\n et toi qui as peur de te faire recaler à l'entrée."
+        "\nLe trottoir devant la boîte : gens qui fument, Uber en warning " \
+        "\net toi qui as peur de te faire recaler à l'entrée."
         exterieur = Room("Exterieur", s, image="exterieur.png")
 
         s = "Billetterie " \
-        "\n Petite file, vigile blasé, machine à CB qui fait plus de bruit que la sono. " \
-        "\n Tu pries pour que ta carte passe."
+        "\nPetite file, vigile blasé, machine à CB qui fait plus de bruit que la sono. " \
+        "\nTu pries pour que ta carte passe."
         billetterie = Room("Billetterie", s, image="billetterie.png")
 
         s = "Vestiaire " \
-        "\n Mega pile de manteaux, ticket froissé dans ta main, et la peur d’oublier " \
-        "\n le numéro à 3h du matin."
+        "\nMega pile de manteaux, ticket froissé dans ta main, et la peur d’oublier " \
+        "\nle numéro à 3h du matin."
         vestiaire = Room("Vestiaire", s, image="vestiaire.png")
 
         s = "Salle Techno " \
-        "\n Stroboscopes, basses qui te font vibrer les organes, DJ qui ne sourit jamais " \
-        "\n mais tout le monde l’adore."
+        "\nStroboscopes, basses qui te font vibrer les organes, DJ qui ne sourit jamais " \
+        "\nmais tout le monde l’adore."
         salle_techno = Room("Salle Techno", s, image="salle_techno.png")
 
         s = "Salle Rap US / FR " \
-        "\n Ça crie les lyrics plus fort que le son, tout le monde " \
-        "\n fait semblant de connaître tous les couplets."
+        "\nÇa crie les lyrics plus fort que le son, tout le monde " \
+        "\nfait semblant de connaître tous les couplets."
         salle_rap = Room("Salle Rap US / FR", s, image="salle_rap.png")
 
         s = "Salle House " \
-        "\n Ambiance house, kicks propres, mélodies qui donnent envie de lever les bras " \
-        "\n même si tu sais pas danser. Les gens ici font genre qu'ils comprennent le mix."
+        "\nAmbiance house, kicks propres, mélodies qui donnent envie de lever les bras " \
+        "\nmême si tu sais pas danser. Les gens ici font genre qu'ils comprennent le mix."
         salle_house = Room("Salle House", s, image="salle_house.png")
 
         s = "Salle Latino / Shatta " \
-        "\n Ambiance caliente, déhanchés sérieux, gens qui dansent trop bien pour que " \
-        "\n tu restes fidèle. Tu hésites entre te laisser tenter ou fuir."
+        "\nAmbiance caliente, déhanchés sérieux, gens qui dansent trop bien pour que " \
+        "\ntu restes fidèle. Tu hésites entre te laisser tenter ou fuir."
         salle_latino = Room("Salle Latino / Shatta", s, image="salle_latino.png")
 
         s = "Fumoir " \
-        "\n Aqua enfumée, discussions philosophiques à 2h du mat, " \
-        "\n et quelqu’un qui parle de lancer un start-up à chaque bouffée."
+        "\nAqua enfumée, discussions philosophiques à 2h du mat, " \
+        "\net quelqu’un qui parle de lancer un start-up à chaque bouffée." \
+        "\nJuste a coté se cache la secret room, veux-tu t'y aventurer ?"
         fumoir = Room("Fumoir", s, image="fumoir.png")
 
         s = "Secret Room " \
-        "\n Une petite salle cachée dont personne ne connaît vraiment la règle d’accès. " \
-        "\n Si tu es là, soit t’es VIP, soit tu t’es perdu."
+        "\nUne petite salle cachée dont personne ne connaît vraiment la règle d’accès. " \
+        "\nSi tu es là, soit t’es VIP, soit tu t’es perdu."
         secret_room = Room("Secret Room", s, image="secret_room.png")
 
         s = "Rooftop " \
-        "\n Vue sur la ville, guirlandes lumineuses, air frais qui sauve des coups de chaud. " \
-        "\n Endroit parfait pour pécho ton pain autour d'un verre de rosé."
+        "\nVue sur la ville, guirlandes lumineuses, air frais qui sauve des coups de chaud. " \
+        "\nEndroit parfait pour pécho ton pain autour d'un verre de rosé."
         rooftop = Room("Rooftop", s, image="rooftop.png")
 
 
@@ -237,30 +238,37 @@ class Game:
             "pass_carré_VIP": Item("pass_carré_VIP", "Essentiel pour accéder à la soirée de la secret room, seulement pour les plus hots...", 1)
         }
         fumoir.inventory = {
-            "casque_DJ": Item("casque_DJ", "Le casque du DJ, sans lequel elle ne peut pas mixer.", 1)
+            "casque_DJ": Item("casque_DJ", "Le casque de Rosa, sans lequel elle ne peut pas mixer.", 1)
         }
 
         # Setup characters/PNJ
-        salle_house.characters = {
-            "DJ_Rosita": Character("DJ_Rosita", "La reine des platines house, toujours prête à faire danser la foule avec ses mixes enflammés.", salle_house, ["Salut toi ! Prêt à bouger sur mes beats ?", "La house, c'est plus qu'un genre musical, c'est un mode de vie.", "Si tu veux que je te prépare un set spécial, faut que tu me montres ton énergie sur le dancefloor."]),  
-            "Tony_le_barman_bg": Character("Tony", "Le barman le plus cool de la boîte, toujours prêt à te servir un cocktail avec le sourire.", salle_house, ["Qu'est-ce que je te sers ce soir ? J'ai des cocktails qui font danser même les plus timides !", "Tu sais, la clé d'une bonne soirée, c'est un bon cocktail et une bonne compagnie.", "Si tu cherches quelque chose de spécial, demande-moi, j'ai des recettes secrètes."])      
-        }
-        salle_latino.characters = {
-            "Anadélys": Character("Anadélys", "Tu sais la pote que tu perds tout le temps car elle part en quête secondaire pendant la soirée, c'est elle !", salle_latino, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."])
-        }
-        salle_rap.characters = {
-            "DJ_rap": Character("DJ_Rap", "Le DJ qui fait vibrer la salle avec les meilleurs sons rap US et FR.", salle_rap, ["Yo, t'as déjà entendu le dernier son de Niska ? Ça déchire !", "Le rap, c'est pas juste de la musique, c'est une culture.", "Si tu veux que je te chauffe le public, faut que tu sois à fond dans le délire."])
-        }
-        salle_techno.characters = {
-            "DJ_techno": Character("DJ", "Le maître des platines, toujours à la recherche de nouvelles vibes pour faire bouger la foule.", salle_techno, ["Hey, t'as vu mon casque ? Je peux pas mixer sans lui !", "La musique, c'est la vie. Sans elle, je suis perdu.", "Si tu trouves mon casque, je te serai éternellement reconnaissant."])
-        }
-        rooftop.characters = {
-            "Daniel_le_farfadet_malicieux": Character("Daniel", "Un petit être espiègle qui aime jouer des tours aux fêtards imprudents.", rooftop, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."])
-        }
-        secret_room.characters = {
-            "Vigile": Character("Vigile", "Le gardien de la secret room, toujours à l'affût des intrus.", secret_room, ["Hé toi, tu cherches à entrer ici ? Montre-moi ce que t'as dans les poches.", "Seuls les plus méritants peuvent accéder à la secret room. Tu penses en faire partie ?", "Je ne laisse passer que ceux qui ont le pass carré VIP. T'en as un ?"])
-        }
-
+        salle_house.characters = [
+            Character("DJ_Rosita", "La reine des platines house, toujours prête à faire danser la foule avec ses mixes enflammés.", salle_house, ["Salut toi ! Prêt à bouger sur mes beats ?", "La house, c'est plus qu'un genre musical, c'est un mode de vie.", "Si tu veux que je te prépare un set spécial, faut que tu me montres ton énergie sur le dancefloor."]),  
+           ]
+        salle_latino.characters = [
+            Character("Anadélys", "Tu sais la pote que tu perds tout le temps car elle part en quête secondaire pendant la soirée, c'est elle !", salle_latino, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."]),
+            Character("Tony", "Le barman le plus cool de la boîte, toujours prêt à te servir un cocktail avec le sourire.", salle_house, ["Qu'est-ce que je te sers ce soir ? J'ai des cocktails qui font danser même les plus timides !", "Tu sais, la clé d'une bonne soirée, c'est un bon cocktail et une bonne compagnie.", "Si tu cherches quelque chose de spécial, demande-moi, j'ai des recettes secrètes."])
+        ]
+        salle_rap.characters = [
+            Character("DJ_Rap", "Le DJ qui fait vibrer la salle avec les meilleurs sons rap US et FR.", salle_rap, ["Yo, t'as déjà entendu le dernier son de Niska ? Ça déchire !", "Le rap, c'est pas juste de la musique, c'est une culture.", "Si tu veux que je te chauffe le public, faut que tu sois à fond dans le délire."])
+        ]
+        salle_techno.characters = [
+            Character("DJ", "Le maître des platines, toujours à la recherche de nouvelles vibes pour faire bouger la foule.", salle_techno, ["Hey, t'as vu mon casque ? Je peux pas mixer sans lui !", "La musique, c'est la vie. Sans elle, je suis perdu.", "Si tu trouves mon casque, je te serai éternellement reconnaissant."])
+        ]
+        rooftop.characters = [
+            Character("Daniel", "Un petit être espiègle qui aime jouer des tours aux fêtards imprudents.", rooftop, ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te faut...", "Attention à ne pas te perdre dans la danse, ou tu pourrais finir comme moi, coincé ici pour l'éternité !", "Un conseil d'ami : ne sous-estime jamais le pouvoir d'une bonne salsa pour charmer la foule."])
+        ]
+        fumoir.characters = [
+            Character("Secret_vigile", "Le gardien de la secret room, toujours à l'affût des intrus.", fumoir, ["Hé toi, tu cherches à entrer ici ? Montre-moi ce que t'as dans les poches.", "Seuls les plus méritants peuvent accéder à la secret room. Tu penses en faire partie ?", "Je ne laisse passer que ceux qui ont le pass carré VIP. T'en as un ?"])
+        ]
+        vestiaire.characters = [
+            Character("Dora", "La fille du vestiaire, toujours prête à aider les fêtards à retrouver leurs affaires.", vestiaire, ["Salut ! T'as perdu quelque chose ?", "Le vestiaire, c'est un vrai labyrinthe. Faut faire gaffe à pas se perdre ici.", "Si tu retrouves ton ticket de vestiaire, je donne ton manteau."])
+        ]
+        
+        # Collect all characters into game.characters for movement
+        for room in self.rooms:
+            for character in room.characters:
+                self.characters.append(character)
 
 
 
@@ -282,24 +290,33 @@ class Game:
     # Setup quests
     def _setup_quests(self):
         """Initialize all quests."""
-        # Quete principale
-        main_quest = Quest(
-        title="Survivre",
-        description=(
-            "Objectif : survivre jusqu'à la fermeture et entrer dans la salle VIP. "
-            "Pas de drama, pas de sécurité, et surtout… assez de jetons."
-        ),
-        objectives=[
-            "Obtenir pass VIP",
-            "Obtenir le code de Daniel",
-            "Avoir 3 jetons",
-            "Ne pas se faire virer",
-            "Visiter Secret Room"
-        ],
-        reward="Victoire : VIP avant fermeture 🥂"
+        Secret_room_quest = Quest(
+            title="Secret Room",
+            description=(
+                "Infiltrer la secret room."
+            ),
+            objectives=[
+                "prendre le pass_carré_VIP",
+                "parler avec secret_vigile",
+                "Entrer dans la secret_room"
+            ],
+            reward="Escroc Membre VIP"
         )
 
-        # Quêtes simples 
+        Manteau_quest = Quest(
+            title="Sauver le manteau",
+            description=(
+                "Mince j'ai perdu mon ticket de vestiaire ! Peux-tu m'aider à le retrouver ? " \
+                "\nSinon je ne pourrais pas récupérer mon manteau en partant..."
+            ),
+            objectives=[
+                "prendre le ticket_vestiaire",
+                "Visiter vestiaire",
+                "parler avec Stecy"
+            ],
+            reward="Manteau"
+        )
+
         Rooftop_quest = Quest(
             title="Rooftop",
             description=(
@@ -308,92 +325,47 @@ class Game:
             objectives=[
                 "Visiter Rooftop"
             ],
-            reward="+1 jeton"
+            reward="Vue imprenable sur la ville"
         )
 
-        Cocktail_quest= Quest(
-            title="prendre le sex_on_the_beach",
-            description=(
-                "prendre le sex_on_the_beach"
-            ),
-            objectives=[
-                "prendre le sex_on_the_beach"
-            ],
-            reward="Titre du plus grand alcoolique de la soirée"       
-        )
-
-        Talk_Daniel_quest= Quest(
-            title="parler à Daniel",
+        Daniel_quest= Quest(
+            title="Daniel",
             description=(
                 "parler à Daniel"
             ),
             objectives=[
                 "parler avec Daniel"
             ],
-            reward="+1 jeton"       
-        )
-        # Petite quête secondaire 1 — Pass carré VIP
-        pass_carre_VIP_quest = Quest(
-            title="Chercher le pass carré VIP",
-            description=(
-                "Un client a perdu son pass d’accès au carré VIP. "
-                "Si tu le retrouves, tu gagnes un jeton et tu pourras infiltrer la secret room."
-            ),
-            objectives=[
-                "Visiter Rooftop",
-                "Fouiller le sol",
-                "Obtenir le pass carré VIP",
-                "Retourner à secret room",
-                "Donner le pass au vigile de la secret room"
-            ],
-            reward="+1 jeton"
+            reward="Un nouveau bestie Daniel le farfadet"       
         )
 
-        # Petite quête 2 — DJ tête en l'air
-        dj_quest = Quest(
-            title="DJ tête en l'air",
+        # Petite quête 2 — DJ Rosa
+        Rosa_quest = Quest(
+            title="DJ Rosa",
             description=(
-                "Le DJ a perdu son casque dans la soirée... il ne peut pas commencer son set. "
-                "Si tu l'aides à le retrouver, il te devra une grosse ambiance."
+                "Rosa a perdu son casque dans la soirée... elle ne peut pas commencer son set. "
+                "Si tu l'aides à le retrouver, elle te devra une grosse ambiance."
             ),
             objectives=[
-                "Parler au DJ",
-                "Visiter le fumoir",
-                "Récupérer le casque du DJ",
-                "Le déposer à la salle techno"
+                "prendre le casque_DJ",
+                "Aller à la salle_house",
             ],
-            reward="+1 jeton"
+            reward="Sauveur la soirée de la salle house"
         )
 
         # Petite quête 3 — Le cocktail Daniel
-        cocktail_quest = Quest(
+        Cocktail_quest = Quest(
             title="Le cocktail Daniel",
             description=(
-                "Tony le barman a créé un nouveau cocktail à l'éfigie du fameux Daniel. "
+                "Tony le barman a créé un nouveau cocktail à l'éfigie du fameux Daniel le farfadet malicieux. "
                 "\nCependant, il n'a plus de sirop magique. Retrouve la bouteille de sirop pour lui, "
                 "et il te préparera sa spécialité."
             ),
             objectives=[
-                "Visiter la salle house",
-                "Trouver la bouteille de sirop magique au vestiaire",
-                "Déposer le sirop à la salle house."
+                "prendre la bouteille_de_sirop_magiques",
+                "parler avec Tony"
             ],
-            reward="+1 jeton"
-        )
-
-        # Petite quête 4 — Chauffeur de salle
-        hype_quest = Quest(
-            title="Chauffeur de Salle",
-            description=(
-                "Le DJ Rap cherche quelqu’un pour chauffer le public. "
-                "Pour être l'heureux élu, tu dois avoir bu un sex on the beach au rooftoop..."
-            ),
-            objectives=[
-                "Visiter le rooftop",
-                "Prendre un sex on the beach",
-                "Retourner à la salle rap",
-            ],
-            reward="+1 jeton"
+            reward="Cocktail Daniel"
         )
 
         # Petite quête 5 — Retrouve ta pote Anadélys
@@ -402,25 +374,23 @@ class Game:
             description=(
                 "Anadélys a disparu dans la soirée. "
                 "Trouve-la vite avant qu'elle ne soit dans une situation critique. "
-                "Pour cela tu dois éviter qu'elle boive un mètre de shooter."
+                "Pour cela tu dois éviter qu'elle boive un mètre de shooter." 
             ),
             objectives=[
-                "Visiter la salle rap",
-                "Prendre les 1 mètre de shooter",
-                "Retrouver Anadélys",
+                "Prendre un_mètre_de_shoote",
+                "parler avec Anadélys",
             ],
-            reward="+1 jeton"
+            reward="Anadélys en pétard, vous allez bien vous amuser ensemble !"
         )
             
         # Add all quests to the player's quest manager
-        self.player.quest_manager.add_quest(main_quest)
+        self.player.quest_manager.add_quest(Secret_room_quest)
+        self.player.quest_manager.add_quest(Manteau_quest)
         self.player.quest_manager.add_quest(Rooftop_quest)
+        self.player.quest_manager.add_quest(Daniel_quest)
         self.player.quest_manager.add_quest(Cocktail_quest)
-        self.player.quest_manager.add_quest(pass_carre_VIP_quest)
-        self.player.quest_manager.add_quest(dj_quest)
-        self.player.quest_manager.add_quest(cocktail_quest)
-        self.player.quest_manager.add_quest(hype_quest)
         self.player.quest_manager.add_quest(research_quest)
+        self.player.quest_manager.add_quest(Rosa_quest)
 
 
 
@@ -439,6 +409,10 @@ class Game:
         # If there are no quests, the player cannot win
         if not all_quests:
             return False
+        
+        if self.player.current_room.name == "Secret Room":
+            print("\n🎉 FÉLICITATIONS! TU AS RÉUSSI À T'INFILTRER DANS LA SECRET ROOM !\n")
+            return True
         
         # Check if all quests are completed
         for quest in all_quests:
@@ -478,7 +452,7 @@ class Game:
                     # Check if enough time has passed (e.g., certain number of moves)
                     if self.player.move_count > 10:
                         print("\n❌ GAME OVER! Tu n'as pas sauvé Anadélys à temps!")
-                        print("Elle a bu le mètre de shooter... c'est un désastre!\n")
+                        print("Elle a bu un mètre de shooter toute seule... c'est un désastre!\n")
                         return True
         
         # Player has not lost
@@ -491,10 +465,11 @@ class Game:
         self.print_welcome()
         # Loop until the game is finished
         while not self.finished:
-            # Check if the player has lost
-            if self.lose():
+            # Check if the player has lost or won the game
+            if self.lose() or self.win():
                 self.finished = True
                 break
+            Actions.move_pnj(self, [], 0)
             # Get the command from the player
             self.process_command(input("> "))
         return None
@@ -635,6 +610,8 @@ class GameGUI(tk.Tk):
         self._btn_right = tk.PhotoImage(file=str(assets_dir / 'right-arrow-50.png'))
         self._btn_monter = tk.PhotoImage(file=str(assets_dir / 'monter-arrow-50.png'))
         self._btn_descendre = tk.PhotoImage(file=str(assets_dir / 'descendre-arrow-50.png'))
+        self._btn_back = tk.PhotoImage(file=str(assets_dir / 'back-50.png'))
+        self._btn_look = tk.PhotoImage(file=str(assets_dir / 'look-50.png'))
         self._btn_quit = tk.PhotoImage(file=str(assets_dir / 'quit-50.png'))
 
         # Command buttons
@@ -670,6 +647,19 @@ class GameGUI(tk.Tk):
                   image=self._btn_descendre,
                   command=lambda: self._send_command("go D"),
                   bd=0).grid(row=3, column=1)
+        
+        # Back button
+        tk.Button(buttons_frame,
+                  image=self._bnt_back,
+                  command=lambda: self._send_command("back"),
+                  bd=0).grid(row=2, column=0, sticky="ew", pady=(2,2))
+        
+        # Look button
+        tk.Button(buttons_frame,
+                  image=self._btn_look,
+                  command=lambda: self._send_command("look"),
+                  bd=0).grid(row=2, column=0, sticky="ew", pady=(5,2))
+        
 
         # Quit button
         tk.Button(buttons_frame,

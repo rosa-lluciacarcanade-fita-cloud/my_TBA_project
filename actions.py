@@ -20,10 +20,11 @@ MSG2 = "\nLa commande '{command_word}' prend 2 paramètres.\n"
 
 class Actions:
 
-    #PROBLEME le PNJ peut avoir current_room = nouvelle salle mais rester listé dans old_room.characters, d'où le message "n'est pas présent" quand on cherche le PNJ dans la salle.
+    @staticmethod
     def move_pnj(game, list_of_words, number_of_parameters):
         for character in game.characters:
-            character.move()
+            if character.name == "Anadélys" or character.name == "Daniel":
+                character.move()
         return True
 
     @staticmethod
@@ -260,6 +261,10 @@ class Actions:
         item = current_room.inventory.pop(item_name)
         player.inventory[item_name] = item
         print(f"\nVous avez pris l'objet '{item_name}'.\n")
+        
+        # Check if taking this item completes any action objectives
+        player.quest_manager.check_action_objectives("prendre", item_name)
+        
         return True
 
 

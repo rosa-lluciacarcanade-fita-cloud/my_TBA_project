@@ -296,7 +296,7 @@ class Quest:
            f"Visiter {room_name}",
            f"Explorer {room_name}",
            f"Aller à {room_name}",
-           f"Entrer dans {room_name}"
+           f"Entrer dans la {room_name}"
        ]
 
 
