@@ -16,7 +16,7 @@ from item import Item
 from quest import Quest
 from character import Character
 
-DEBUG = False
+DEBUG = True
 class Game:
     """Main class for the text-based adventure game."""
 
@@ -103,7 +103,7 @@ class Game:
         exterieur = Room("Exterieur", s, image="exterieur.png")
 
         s = "Billetterie " \
-        "\nPetite file, vigile blasé, machine à CB qui fait plus de bruit que la sono. " \
+        "\nPetite file, videur blasé, machine à CB qui fait plus de bruit que la sono. " \
         "\nTu pries pour que ta carte passe."
         billetterie = Room("Billetterie", s, image="billetterie.png")
 
@@ -135,7 +135,8 @@ class Game:
         s = "Fumoir " \
         "\nAqua enfumée, discussions philosophiques à 2h du mat, " \
         "\net quelqu’un qui parle de lancer un start-up à chaque bouffée." \
-        "\nJuste a coté se cache la secret room, veux-tu t'y aventurer ?"
+        "\nJuste a coté se cache la secret room, veux-tu t'y aventurer ? " \
+        "\nSPOILER ALERTE : tu risques de ne jamais en ressortir si tu n'est pas un vrai membre..."
         fumoir = Room("Fumoir", s, image="fumoir.png")
 
         s = "Secret Room " \
@@ -227,15 +228,25 @@ class Game:
                              "D" : None}
 
         # Setup items
+        billetterie.inventory = {
+            "note_du_videur": Item(
+                "note_du_videur",
+                "Un bout de papier froissé avec un code écrit dessus : '7429'. " +
+                "Aucune idée à quoi ça sert, mais ça a l'air important...",
+                1)
+        }
         vestiaire.inventory = {
-            "ticket_vestiaire": Item(
-                "ticket_vestiaire",
-                "Indispensable pour récupérer ton manteau plus tard.",
-                1),
             "bouteille_de_sirop_magiques": Item(
                 "bouteille_de_sirop_magiques",
                 "Pour une soirée de farfadet où ton cerveau va alluciner.",
                 1)
+        }
+        salle_house.inventory = {
+            "mojito": Item(
+                "mojito",
+                "Un mojito plein de glace, deux feuilles de menthe fatiguées " +
+                "et assez de sucre pour te faire croire que t’es encore sobre.",
+                0)
         }
         salle_rap.inventory = {
             "un_mètre_de_shooter": Item(
@@ -244,12 +255,32 @@ class Game:
                 "résister ?",
                 1)
         }
-        rooftop.inventory = {
+        salle_techno.inventory = {
+            "lunette_stylé": Item(
+                "lunette_stylé",
+                "Des lunettes de gros BDG qui crie 'JE SUIS VIP' même si t'as une tête de touriste perdu. " +
+                "\nL'accessoire indispensable pour te sentir important dans une boîte." +
+                "\nAvec ça, t'es sûr de pécho plus facilement.",
+                1)
+        }
+        salle_latino.inventory = {
+            "ticket_vestiaire": Item(
+                "ticket_vestiaire",
+                "Un ticket de vestiaire un peu froissé avec le numéro 27 dessus. " +
+                "Indispensable pour récupérer ton manteau plus tard.",
+                1),
             "sex_on_the_beach": Item(
                 "sex_on_the_beach",
                 "Un cocktail sucré et coloré, parfait pour débuter " +
                 "la soirée.",
-                1),
+                0),
+        }
+        rooftop.inventory = {
+            "gin_tonic": Item(
+                "gin_tonic",
+                "Un gin tonic servi beaucoup trop fort. "
+                "Tu dis ‘ça passe’, mais dans 20 minutes tu regretteras tout.",
+                0),
             "pass_carré_VIP": Item(
                 "pass_carré_VIP",
                 "Essentiel pour accéder à la soirée de la secret room, " +
@@ -260,6 +291,11 @@ class Game:
             "casque_DJ": Item(
                 "casque_DJ",
                 "Le casque de Rosa, sans lequel elle ne peut pas mixer.",
+                1),
+            "cigarette_de_luxe": Item(
+                "cigarette_de_luxe",
+                "Une cigarette de marque premium, un accessoire indispensable pour les VIP. " +
+                "Ça fait classe dans une boîte de nuit.",
                 1)
         }
 
@@ -353,14 +389,10 @@ class Game:
         vestiaire.characters = [
             Character(
                 "Dora",
-                "La fille du vestiaire, toujours prête à aider les " +
-                "fêtards à retrouver leurs affaires.",
+                "La dame du vestiaire, toujours prête à aider les " +  
+                "clients à retrouver leurs affaires.",
                 vestiaire,
-                ["Salut ! T'as perdu quelque chose ?",
-                 "Le vestiaire, c'est un vrai labyrinthe. Faut faire " +
-                 "gaffe à pas se perdre ici.",
-                 "Si tu retrouves ton ticket de vestiaire, je donne ton " +
-                 "manteau."])
+                ["Pas de ticket pas de manteau !"],)  
         ]
 
         # Collect all characters into game.characters for movement
@@ -384,10 +416,13 @@ class Game:
         Secret_room_quest = Quest(
             title="Secret Room",
             description=(
-                "Infiltrer la secret room."
+                "Infiltrer la secret room. Il faut avoir le bon look et les bons codes."
             ),
             objectives=[
                 "prendre le pass_carré_VIP",
+                "prendre la cigarette_de_luxe",
+                "prendre lunette_stylé",
+                "prendre le note_du_videur",
                 "parler avec Secret_vigile",
                 "Entrer dans la secret_room"
             ],
@@ -402,32 +437,10 @@ class Game:
             ),
             objectives=[
                 "prendre le ticket_vestiaire",
-                "Visiter vestiaire",
-                "parler avec Stecy"
+                "Visiter Vestiaire",
+                "parler avec Dora"
             ],
             reward="Manteau"
-        )
-
-        Rooftop_quest = Quest(
-            title="Rooftop",
-            description=(
-                "Visite Rooftop."
-            ),
-            objectives=[
-                "Visiter Rooftop"
-            ],
-            reward="Vue imprenable sur la ville"
-        )
-
-        Daniel_quest= Quest(
-            title="Daniel",
-            description=(
-                "parler à Daniel"
-            ),
-            objectives=[
-                "parler avec Daniel"
-            ],
-            reward="Un nouveau bestie Daniel le farfadet"
         )
 
         # Petite quête 2 — DJ Rosa
@@ -439,51 +452,50 @@ class Game:
             ),
             objectives=[
                 "prendre le casque_DJ",
-                "Aller à la salle_house",
+                "parler avec DJ_Rosita"
             ],
-            reward="Sauveur la soirée de la salle house"
+            reward="Titre de sauveur soirée house"
         )
 
         # Petite quête 3 — Le cocktail Daniel
         Cocktail_quest = Quest(
-            title="Le cocktail Daniel",
+            title="Cocktail Daniel",
             description=(
                 "Tony le barman a créé un nouveau cocktail à l'éfigie " +
                 "du fameux Daniel le farfadet malicieux. " +
-                "\nCependant, il n'a plus de sirop magique. Retrouve " +
+                "\nCependant, il n'a plus de sirop magique que Daniel lui avait donné. Retrouve " +
                 "la bouteille de sirop pour lui, " +
                 "et il te préparera sa spécialité."
             ),
             objectives=[
+                "parler avec Daniel",
                 "prendre la bouteille_de_sirop_magiques",
                 "parler avec Tony"
             ],
-            reward="Cocktail Daniel"
+            reward="Un nouveau bestie Daniel le farfadet + Le fameux cocktail Daniel"
         )
 
-        # Petite quête 5 — Retrouve ta pote Anadélys
-        research_quest = Quest(
-            title="Retrouve ta pote Anadélys",
+        # Petite quête 5 — Retrouve Anadélys
+        Anadelys_quest = Quest(
+            title="Retrouve Anadélys",
             description=(
                 "Anadélys a disparu dans la soirée. "
                 "Trouve-la vite avant qu'elle ne soit dans une situation critique. "
                 "Pour cela tu dois éviter qu'elle boive un mètre de shooter."
             ),
             objectives=[
-                "Prendre un_mètre_de_shoote",
+                "prendre un_mètre_de_shooter",
                 "parler avec Anadélys",
             ],
             reward="Anadélys en pétard, vous allez bien vous amuser ensemble !"
         )
 
         # Add all quests to the player's quest manager
-        self.player.quest_manager.add_quest(Secret_room_quest)
         self.player.quest_manager.add_quest(Manteau_quest)
-        self.player.quest_manager.add_quest(Rooftop_quest)
-        self.player.quest_manager.add_quest(Daniel_quest)
-        self.player.quest_manager.add_quest(Cocktail_quest)
-        self.player.quest_manager.add_quest(research_quest)
         self.player.quest_manager.add_quest(Rosa_quest)
+        self.player.quest_manager.add_quest(Anadelys_quest)
+        self.player.quest_manager.add_quest(Cocktail_quest)
+        self.player.quest_manager.add_quest(Secret_room_quest)
 
     # Check if the player has won the game
     def win(self):
@@ -496,9 +508,10 @@ class Game:
         # Get all quests from the player's quest manager
         all_quests = self.player.quest_manager.quests
 
-        if self.player.current_room.name == "Secret Room":
-            print("\n🎉 FÉLICITATIONS! TU AS RÉUSSI À T'INFILTRER DANS LA SECRET ROOM !\n")
-            return True
+        for quest in all_quests:
+            if quest.title == "Secret Room" and  quest.is_completed :
+                print("\n🎉 FÉLICITATIONS! TU AS RÉUSSI À T'INFILTRER DANS LA SECRET ROOM !\n")
+                return True
         
         # If there are no quests, the player cannot win
         if not all_quests:
@@ -510,6 +523,7 @@ class Game:
                 return False
 
         # All quests are completed
+        print("\n🎉 FÉLICITATIONS! TU AS COMPLÉTÉ TOUTES LES QUÊTES DU JEU !\n")
         return True
 
     # Check if the player has lost the game
@@ -520,6 +534,9 @@ class Game:
         Losing conditions:
         1. Entering the Secret Room without the "pass carré VIP" item
         2. Allowing Anadélys to drink the "1 mètre de shooter" (failing the rescue quest)
+        3. Entering the Secret Room without completing the "Secret Room" quest
+        4. Taking the "bouteille_de_sirop_magiques" before talking to Daniel
+        5. Drinking too much 
 
         Returns:
             bool: True if the player has lost, False otherwise.
@@ -527,25 +544,55 @@ class Game:
         # Check if the player is in the Secret Room
         if self.player.current_room.name == "Secret Room":
             # Check if the player has the "pass carré VIP" item
-            if "pass carré VIP" not in self.player.inventory:
+            if "pass_carré_VIP" not in self.player.inventory:
                 print("\n❌ GAME OVER! Tu n'avais pas le pass carré VIP " +
                       "pour accéder à la Secret Room!")
-                print("Le vigile t'a jeté dehors. C'est la fin de ta " +
+                print("Le vigile t'a jeté dehors comme une merde. C'est la fin de ta " +
                       "soirée...\n")
                 return True
+          
 
         # Check if Anadélys quest is active and if the player failed to save her
         for quest in self.player.quest_manager.quests:
-            if quest.title == "Retrouve ta pote Anadélys" and quest.is_active:
+            if quest.title == "Retrouve Anadélys" and quest.is_active:
                 # If the objective "Prendre les 1 mètre de shooter" is completed but
                 # "Retrouver Anadélys" is not, the player failed to save her in time
                 if ("Prendre les 1 mètre de shooter" in quest.completed_objectives and
-                    "Retrouver Anadélys" not in quest.completed_objectives):
+                    "parler avec Anadélys" not in quest.completed_objectives):
                     # Check if enough time has passed (e.g., certain number of moves)
-                    if self.player.move_count > 10:
+                    if self.player.move_count > 3:
                         print("\n❌ GAME OVER! Tu n'as pas sauvé Anadélys à temps!")
-                        print("Elle a bu un mètre de shooter toute seule... c'est un désastre!\n")
+                        print("Elle a bu un mètre de shooter toute seule.")
+                        print("C'est un désastre... Elle est complètement déchaînée maintenant.")
+                        print("Depuis, elle danse non-stop : salsa, bachata, shatta… même quand la musique s’arrête.")
+                        print("Elle a élu domicile dans la salle latino.")
+                        print("Tu ne la feras jamais partir.")
+                        print("Tu es coincé ici pour toujours avec elle.\n")
                         return True
+                    
+        # Check if you talk with Daniel before taking the bottle of sirop magique
+        for quest in self.player.quest_manager.quests:
+            if quest.title == "Cocktail Daniel" and quest.is_active:
+                if ("prendre la bouteille_de_sirop_magiques" in quest.completed_objectives and
+                    "parler avec Daniel" not in quest.completed_objectives):
+                    print("\n❌ GAME OVER!")
+                    print("Tu as pris le sirop magique sans parler à Daniel!")
+                    print("Grave erreur!!")
+                    print("Furieux, le farfadet hurle, siffle et claque des doigts.")
+                    print("Une malédiction malicieuseeee s’abat sur toi.")
+                    print("Désormais, tous les cocktails que tu bois ont un goût de jus de chaussette.")
+                    print("Jamais tu connaîtras le fameux Cocktail Daniel de Tony.\n")
+                    return True
+        
+        
+        # Check if player's has drunk too much
+        if self.player.drink_count >= 6:
+            print("\n❌ GAME OVER!")
+            print("Tu as trop bu, tes jambes ont décidé de quitter la soirée sans toi.")
+            print("Tu t’effondres sur le dancefloor sous les regards gênés.")
+            print("La sécurité arrive et te sort comme un sac de patates.")
+            print("La soirée est finie. Ta dignité aussi...\n")
+            return True
 
         # Player has not lost
         return False
@@ -561,7 +608,7 @@ class Game:
             if self.lose() or self.win():
                 self.finished = True
                 break
-            Actions.move_pnj(self, [], 0)
+            #Actions.move_pnj(self, [], 0)
             # Get the command from the player
             self.process_command(input("> "))
         return None

@@ -42,8 +42,9 @@ class Player():
         self.current_room = None
         self.history = []
         self.inventory = {}
-        self.max_weight = 4
+        self.max_weight = 10
         self.move_count = 0
+        self.drink_count = 0
         self.quest_manager = QuestManager(self)
         self.rewards = []  # List to store earned rewards
       # Define the move method.

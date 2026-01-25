@@ -333,9 +333,9 @@ class Quest:
        False
        """
 
-       print(f"DEBUG: Checking action objective for action='{action}', target='{target}'")
-       print(f"DEBUG: Quest objectives: {self.objectives}")
-       print(f"DEBUG: Completed objectives: {self.completed_objectives}")
+    #    print(f"DEBUG: Checking action objective for action='{action}', target='{target}'")
+    #    print(f"DEBUG: Quest objectives: {self.objectives}")
+    #    print(f"DEBUG: Completed objectives: {self.completed_objectives}")
 
        if target:
            objective_variations = [
@@ -347,18 +347,18 @@ class Quest:
        else:
            objective_variations = [action]
 
-       print(f"DEBUG: Generated objective variations: {objective_variations}")
+       #print(f"DEBUG: Generated objective variations: {objective_variations}")
 
        for objective in objective_variations:
-           print(f"DEBUG: Checking objective: {objective}")
-           print(f"DEBUG: Objective in list? {objective in self.objectives}")
-           print(f"DEBUG: Already completed? {objective in self.completed_objectives}")
+        #    print(f"DEBUG: Checking objective: {objective}")
+        #    print(f"DEBUG: Objective in list? {objective in self.objectives}")
+        #    print(f"DEBUG: Already completed? {objective in self.completed_objectives}")
            if self.complete_objective(objective, player):
-               print(f"DEBUG: Objective '{objective}' completed successfully.")
+               #print(f"DEBUG: Objective '{objective}' completed successfully.")
                return True
-           else:
-               print(f"DEBUG: Objective '{objective}' not completed.")
-       print(f"DEBUG: No matching objective found for action='{action}', target='{target}'")
+           #else:
+               #print(f"DEBUG: Objective '{objective}' not completed.")
+       #print(f"DEBUG: No matching objective found for action='{action}', target='{target}'")
        return False
 
 
@@ -621,15 +621,15 @@ class QuestManager:
        0
        """
 
-       print(f"DEBUG: Checking action objectives for action='{action}', target='{target}' in QuestManager")
-       print(f"DEBUG: Number of active quests: {len(self.active_quests)}")
+    #    print(f"DEBUG: Checking action objectives for action='{action}', target='{target}' in QuestManager")
+    #    print(f"DEBUG: Number of active quests: {len(self.active_quests)}")
 
        for quest in self.active_quests[:]:
-           print(f"DEBUG: Checking quest '{quest.title}'")
+           #print(f"DEBUG: Checking quest '{quest.title}'")
            result = quest.check_action_objective(action, target, self.player)
-           print(f"DEBUG: Quest '{quest.title}' result: {result}")
+           #print(f"DEBUG: Quest '{quest.title}' result: {result}")
            if quest.is_completed:
-               print(f"DEBUG: Quest '{quest.title}' is completed, removing from active quests")
+               #print(f"DEBUG: Quest '{quest.title}' is completed, removing from active quests")
                self.active_quests.remove(quest)
 
 

@@ -273,6 +273,11 @@ class Actions:
                    f"({player.max_weight} kg).\n")
             print(msg)
             return False
+        
+        if item_name in ["mojito", "sex_on_the_beach"]:
+            game.player.drink_count += 3
+        elif item_name in ["gin_tonic", "un_mètre_de_shooter"]:
+            game.player.drink_count += 5
 
         item = current_room.inventory.pop(item_name)
         player.inventory[item_name] = item
