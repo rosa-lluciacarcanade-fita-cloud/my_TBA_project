@@ -23,14 +23,4 @@ Réussir à t’infiltrer dans la **Secret Room**.
 
 ---
 
-### 2) Installation
 
-#### Prérequis
-- Python **3.10+** recommandé
-- Tkinter (souvent déjà inclus avec Python)
-
-#### Récupérer le projet
-Cloner / télécharger le dossier puis se placer dedans :
-
-```bash
-cd votre_dossier
