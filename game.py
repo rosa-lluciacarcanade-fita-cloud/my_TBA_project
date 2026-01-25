@@ -557,10 +557,8 @@ class Game:
             if quest.title == "Retrouve Anadélys" and quest.is_active:
                 # If the objective "Prendre les 1 mètre de shooter" is completed but
                 # "Retrouver Anadélys" is not, the player failed to save her in time
-                if ("Prendre les 1 mètre de shooter" in quest.completed_objectives and
-                    "parler avec Anadélys" not in quest.completed_objectives):
-                    # Check if enough time has passed (e.g., certain number of moves)
-                    if self.player.move_count > 3:
+                if ("Prendre les 1 mètre de shooter" in quest.completed_objectives):
+                    if not ("parler avec Anadélys" not in quest.completed_objectives):
                         print("\n❌ GAME OVER! Tu n'as pas sauvé Anadélys à temps!")
                         print("Elle a bu un mètre de shooter toute seule.")
                         print("C'est un désastre... Elle est complètement déchaînée maintenant.")
