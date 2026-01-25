@@ -533,7 +533,7 @@ class Game:
         2. Allowing Anadélys to drink the "1 mètre de shooter" (failing the rescue quest)
         3. Entering the Secret Room without completing the "Secret Room" quest
         4. Taking the "bouteille_de_sirop_magiques" before talking to Daniel
-        5. Drinking too much 
+        5. Drinking too much .
 
         Returns:
             bool: True if the player has lost, False otherwise.
