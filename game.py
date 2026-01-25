@@ -860,6 +860,9 @@ class GameGUI(tk.Tk):
         self.game.process_command(command)
         # Update room image after command (in case player moved)
         self._update_room_image()
+        # Check if the player has lost or won the game
+        if self.game.lose() or self.game.win():
+            self.game.finished = True
         if self.game.finished:
             # Disable further input and schedule close (brief delay to show farewell)
             self.entry.configure(state="disabled")
