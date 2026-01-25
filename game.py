@@ -259,8 +259,7 @@ class Game:
             "lunette_stylé": Item(
                 "lunette_stylé",
                 "Des lunettes de gros BDG qui crie 'JE SUIS VIP' même si t'as une tête de touriste perdu. " +
-                "\nL'accessoire indispensable pour te sentir important dans une boîte." +
-                "\nAvec ça, t'es sûr de pécho plus facilement.",
+                "Avec ça, t'es sûr de pécho plus facilement.",
                 1)
         }
         salle_latino.inventory = {
@@ -318,12 +317,10 @@ class Game:
                 "Tu sais la pote que tu perds tout le temps car elle " +
                 "part en quête secondaire pendant la soirée, c'est elle !",
                 salle_latino,
-                ["Tu cherches à pimenter ta soirée ? J'ai ce qu'il te " +
-                 "faut...",
-                 "Attention à ne pas te perdre dans la danse, ou tu " +
-                 "pourrais finir comme moi, coincé ici pour l'éternité !",
-                 "Un conseil d'ami : ne sous-estime jamais le pouvoir " +
-                 "d'une bonne salsa pour charmer la foule."]),
+                ["Elle est en pétard la soirée ! On va bien s'amuser !",
+                 "Tu veux danser la salsa avec moi ? Allez, viens !",
+                 "J'adore cette ambiance caliente, ça me donne envie de " +
+                 "faire la fête toute la nuit !"]),
             Character(
                 "Tony",
                 "Le barman le plus cool de la boîte, toujours prêt à " +
@@ -424,7 +421,7 @@ class Game:
                 "prendre lunette_stylé",
                 "prendre le note_du_videur",
                 "parler avec Secret_vigile",
-                "Entrer dans la secret_room"
+                "Entrer dans la Secret Room"
             ],
             reward="Escroc Membre VIP"
         )
