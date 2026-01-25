@@ -496,13 +496,13 @@ class Game:
         # Get all quests from the player's quest manager
         all_quests = self.player.quest_manager.quests
 
-        # If there are no quests, the player cannot win
-        if not all_quests:
-            return False
-
         if self.player.current_room.name == "Secret Room":
             print("\n🎉 FÉLICITATIONS! TU AS RÉUSSI À T'INFILTRER DANS LA SECRET ROOM !\n")
             return True
+        
+        # If there are no quests, the player cannot win
+        if not all_quests:
+            return False
 
         # Check if all quests are completed
         for quest in all_quests:
