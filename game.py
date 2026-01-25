@@ -388,7 +388,7 @@ class Game:
             ),
             objectives=[
                 "prendre le pass_carré_VIP",
-                "parler avec secret_vigile",
+                "parler avec Secret_vigile",
                 "Entrer dans la secret_room"
             ],
             reward="Escroc Membre VIP"
